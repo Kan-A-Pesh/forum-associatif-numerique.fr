@@ -9,7 +9,7 @@ export default async function Hero() {
 
     return (
         <section className="relative min-h-screen min-w-full">
-            <Image src={heroUrl} alt="Hero" className="object-cover object-center w-full h-full absolute -z-10" layout="fill" />
+            <Image src={heroUrl} alt="Hero" className="object-cover object-center w-full h-full absolute -z-10" fill />
 
             <div className="bg-opacity-80 bg-black w-full min-h-screen p-2 sm:p-8 md:p-16 xl:p-32 flex">
                 <div className="grow border border-slate-300 flex flex-col justify-between p-4 lg:p-8">
