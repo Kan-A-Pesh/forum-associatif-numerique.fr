@@ -1,3 +1,5 @@
+"use server";
+
 import Hero from "./_layout/hero";
 // import News from "./_layout/news";
 // import Clubs from "./_layout/clubs";

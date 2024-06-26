@@ -1,13 +1,12 @@
+"use server";
+
 import AuthButton from "@/components/AuthButton";
+import getAuth from "@/utils/supabase/auth";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
 export default async function ProtectedLayout() {
-    const supabase = createClient();
-
-    const {
-        data: { user },
-    } = await supabase.auth.getUser();
+    const { user } = await getAuth();
 
     if (!user) {
         return redirect("/login");

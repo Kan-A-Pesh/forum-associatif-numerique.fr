@@ -1,3 +1,5 @@
+"use server";
+
 import Image from "next/image";
 import HeroButton from "./components/HeroButton";
 import AssetsHero from "@/assets/hero";
