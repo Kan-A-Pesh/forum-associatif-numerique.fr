@@ -2,7 +2,7 @@ import { League_Spartan } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const defaultUrl = process.env.URL ? `https://${process.env.URL}` : "http://localhost:3000";
+const defaultUrl = process.env.NEXT_PUBLIC_URL ? `https://${process.env.NEXT_PUBLIC_URL}` : "http://localhost:3000";
 
 export const metadata = {
     metadataBase: new URL(defaultUrl),
