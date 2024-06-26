@@ -1,6 +1,5 @@
 import Image from "next/image";
 import HeroButton from "./components/HeroButton";
-import { createClient } from "@/utils/supabase/server";
 import AssetsHero from "@/assets/hero";
 import AssetsSchools from "@/assets/schools";
 
