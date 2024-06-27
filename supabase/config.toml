@@ -68,7 +68,7 @@ enabled = true
 file_size_limit = "5MiB"
 
 [storage.image_transformation]
-enabled = true
+enabled = false
 
 [auth]
 enabled = true
