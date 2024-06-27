@@ -2,6 +2,9 @@
 
 ## Webmaster features
 
+[x] Navbar
+[ ] Dashboard
+
 ### Assets management
 
 [ ] View assets
@@ -45,7 +48,8 @@
 [ ] Database
 [ ] Documentations
 [ ] Accessibility
-[ ] SEO
+[ ] Open-graph & Metadata
+[ ] Sitemap
 [ ] Analytics
 [ ] Internationalization (i18n)
 [ ] Monitoring

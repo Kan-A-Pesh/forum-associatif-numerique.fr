@@ -1,4 +1,4 @@
-import { League_Spartan } from "next/font/google";
+import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -10,14 +10,14 @@ export const metadata = {
     description: "The fastest way to build apps with Next.js and Supabase",
 };
 
-const fontSans = League_Spartan({
+const fontSans = Hanken_Grotesk({
     subsets: ["latin"],
     variable: "--font-sans",
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en" className={fontSans.variable}>
+        <html lang="en">
             <body className={cn("min-h-screen bg-black text-white font-sans antialiased", fontSans.variable)}>{children}</body>
         </html>
     );
