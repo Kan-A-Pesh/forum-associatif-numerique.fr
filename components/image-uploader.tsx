@@ -6,18 +6,34 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
 import Icon from "./icon";
 import { Status } from "@/types/status";
+import { FileData } from "@/types/assets/file-data";
 
 interface Props {
-    initialImage: string;
-    onUpload: (fileFormData: FormData) => Promise<Status<string>>;
+    initialImage?: string;
     height?: number;
     width?: number;
     alt: string;
+    reducedCaption?: boolean;
     className?: ClassName;
+    children?: React.ReactNode;
+    onUpload: (name: string, fileFormData: FormData) => Promise<Status<FileData>>;
+    remove?: (name: string) => Promise<Status<void>>;
+    name: string;
 }
 
-export default function ImageUploader({ initialImage, onUpload, height, width, alt, className }: Props) {
-    const [image, setImage] = useState<string>(initialImage);
+export default function ImageUploader({
+    initialImage,
+    onUpload,
+    remove,
+    name,
+    height,
+    width,
+    alt,
+    reducedCaption,
+    className,
+    children,
+}: Props) {
+    const [image, setImage] = useState<string>(initialImage ?? "<null>");
     const [isDragging, setIsDragging] = useState(false);
     const dropContainer = useRef<HTMLButtonElement>(null);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -76,56 +92,77 @@ export default function ImageUploader({ initialImage, onUpload, height, width, a
         input.click();
     };
 
-    const upload = async (file: File) => {
+    const handleUpload = async (file: File) => {
         const formData = new FormData();
         formData.append("data", file);
-        const { data, error } = await onUpload(formData);
+        const { data, error } = await onUpload(name, formData);
 
-        console.log(data, error);
+        console.log(data, error, name);
 
         setSelectedImage(null);
         setError(error?.message ?? null);
-        if (data) setImage(data);
+        if (data) setImage(data.url);
+    };
+
+    const handleRemove = async () => {
+        if (!remove) return;
+        const { error } = await remove(name);
+        setError(error?.message ?? null);
     };
 
     return (
         <div className={cn("flex flex-col w-fit", className)}>
-            <div className="relative">
-                <Image
-                    src={selectedImage ? URL.createObjectURL(selectedImage) : image}
-                    width={width}
-                    height={height}
-                    style={{ height, width, objectFit: "cover" }}
-                    alt={alt}
-                    objectFit="cover"
-                    objectPosition="center"
-                />
+            <div className="relative overflow-hidden rounded-lg">
+                {image === "<null>" && !selectedImage ? (
+                    <div style={{ height, width }} className="bg-gray-500 bg-opacity-25 flex flex-col justify-center items-center">
+                        {children}
+                    </div>
+                ) : (
+                    <Image
+                        src={selectedImage ? URL.createObjectURL(selectedImage) : image}
+                        width={width}
+                        height={height}
+                        style={{ height, width }}
+                        alt={alt}
+                        className="object-cover object-center"
+                    />
+                )}
                 <button
                     data-dragging={isDragging}
                     className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 data-[dragging=true]:opacity-100 cursor-pointer w-full h-full"
                     onClick={handleClick}
                     ref={dropContainer}
                 >
-                    <div className="p-2 bg-black bg-opacity-50 rounded-lg border-2 border-dashed border-white w-32 h-32 flex flex-col items-center justify-center gap-1 pointer-events-none">
+                    <div className="p-2 bg-black bg-opacity-50 rounded-lg border-2 border-dashed border-white w-32 h-32 max-w-[75%] max-h-[75%] flex flex-col items-center justify-center gap-1 pointer-events-none">
                         <Icon icon="upload" className="w-6 h-6" />
-                        <span>{isDragging ? "Drop here" : "Upload"}</span>
+                        {reducedCaption ? null : <span>{isDragging ? "Drop here" : "Upload"}</span>}
                     </div>
                 </button>
             </div>
-            <div className="h-9 flex items-center justify-center mt-1 gap-2">
+            <div className={cn("min-h-9 flex items-center justify-center mt-1 gap-2", reducedCaption ? "flex-col" : "flex-row")}>
                 {selectedImage ? (
                     <>
-                        <Button size="sm" variant="link" className="min-w-24" onClick={() => setSelectedImage(null)}>
+                        <Button
+                            size="sm"
+                            variant="link"
+                            className={reducedCaption ? "p-1" : "min-w-24"}
+                            onClick={() => setSelectedImage(null)}
+                        >
                             Cancel
                         </Button>
-                        <Button size="sm" className="min-w-24" onClick={() => upload(selectedImage)}>
+                        <Button size="sm" className={reducedCaption ? "p-1" : "min-w-24"} onClick={() => handleUpload(selectedImage)}>
                             Upload
                         </Button>
                     </>
                 ) : error ? (
                     <span className="text-sm text-red-500">{error}</span>
-                ) : (
+                ) : reducedCaption ? null : (
                     <span className="text-sm text-gray-500">Click to upload or drop a new image</span>
+                )}
+                {remove && (
+                    <Button size="sm" variant="destructive" className={reducedCaption ? "p-1" : "min-w-24"} onClick={handleRemove}>
+                        Remove
+                    </Button>
                 )}
             </div>
         </div>

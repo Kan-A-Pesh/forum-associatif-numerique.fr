@@ -1,11 +1,11 @@
-"server-only";
+"use server";
 
 import { Status } from "@/types/status";
 import { createClient } from "../supabase/server";
-import { revalidatePath } from "next/cache";
 import { md5hash } from "../crypto/md5";
+import { FileData } from "@/types/assets/file-data";
 
-export function getAssetStorage() {
+export async function getAssetStorage() {
     const supabase = createClient();
     const storage = supabase.storage.from("assets");
     const cache = supabase.from("cache");
@@ -13,23 +13,33 @@ export function getAssetStorage() {
     return { supabase, cache, storage };
 }
 
-export async function getPublicUrl(filePath: string, assetStorage?: ReturnType<typeof getAssetStorage>): Promise<string> {
-    const { cache, storage } = assetStorage ?? getAssetStorage();
+export async function getPublicUrl(filePath: string, assetStorage?: any): Promise<string> {
+    const { cache, storage } = assetStorage ?? (await getAssetStorage());
     const { data } = await cache.select("value").limit(1).eq("key", md5hash(filePath)).maybeSingle();
     return storage.getPublicUrl(filePath).data.publicUrl + (data ? "?v=" + data.value : "");
 }
 
-export async function listFiles(folderPath: string): Promise<string[]> {
-    const assetStorage = getAssetStorage();
+export async function listFiles(folderPath: string): Promise<FileData[]> {
+    const assetStorage = await getAssetStorage();
 
     const fileList = await assetStorage.storage.list(folderPath);
     if (fileList.error) return [];
 
-    const files = await Promise.all(fileList.data.map(async (file) => await getPublicUrl(folderPath + "/" + file.name, assetStorage)));
+    const files = await Promise.all(
+        fileList.data.map(async (file) => {
+            const filePath = folderPath + "/" + file.name;
+            return {
+                path: filePath,
+                url: await getPublicUrl(filePath, assetStorage),
+            };
+        }),
+    );
     return files ?? [];
 }
 
-export async function uploadFile(filePath: string, file?: File): Promise<Status<string>> {
+export async function uploadFile(filePath: string, fileFormData: FormData): Promise<Status<FileData>> {
+    const file = fileFormData.get("data") as File;
+
     if (!file) {
         return {
             error: {
@@ -40,8 +50,8 @@ export async function uploadFile(filePath: string, file?: File): Promise<Status<
         };
     }
 
-    const storage = getAssetStorage();
-    const { data, error } = await storage.storage.update(filePath, file, {
+    const storage = await getAssetStorage();
+    const { data, error } = await storage.storage.upload(filePath, file, {
         contentType: file.type,
         upsert: true,
     });
@@ -55,12 +65,17 @@ export async function uploadFile(filePath: string, file?: File): Promise<Status<
 
     return {
         error: error,
-        data: data ? await getPublicUrl(filePath, storage) : null,
+        data: data
+            ? {
+                  path: filePath,
+                  url: await getPublicUrl(filePath, storage),
+              }
+            : null,
     };
 }
 
 export async function removeFile(filePath: string): Promise<Status<void>> {
-    const storage = getAssetStorage();
+    const storage = await getAssetStorage();
 
     const { error } = await storage.storage.remove([filePath]);
     await storage.cache.delete().eq("key", md5hash(filePath));

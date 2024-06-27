@@ -2,13 +2,17 @@
 
 import Image from "next/image";
 import HeroButton from "./components/HeroButton";
-import AssetsHero from "@/assets/hero";
-import AssetsSchools from "@/assets/schools";
+import { getPublicUrl, listFiles } from "@/utils/assets/bucket";
 
 export default async function Hero() {
     return (
         <section className="relative min-h-screen min-w-full">
-            <Image src={await AssetsHero.getUrl()} alt="Hero" className="object-cover object-center w-full h-full absolute -z-10" fill />
+            <Image
+                src={await getPublicUrl("hero.png")}
+                alt="Hero"
+                className="object-cover object-center w-full h-full absolute -z-10"
+                fill
+            />
 
             <div className="bg-opacity-80 bg-black w-full min-h-screen p-2 sm:p-8 md:p-16 xl:p-32 flex">
                 <div className="grow border border-slate-300 flex flex-col justify-between p-4 lg:p-8">
@@ -24,8 +28,8 @@ export default async function Hero() {
                     </div>
 
                     <div className="flex justify-end gap-2">
-                        {(await AssetsSchools.getUrls()).map((url) => (
-                            <Image key={url} src={url} alt="School image" width={48} height={48} />
+                        {(await listFiles("schools")).map((files, index) => (
+                            <Image key={index} src={files.url} alt="School image" width={48} height={48} />
                         ))}
                     </div>
                 </div>

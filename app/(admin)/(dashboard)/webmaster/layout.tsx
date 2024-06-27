@@ -6,7 +6,7 @@ export default async function WebmasterLayout({ children }: { children: React.Re
     return (
         <>
             <TopMenu className="fixed h-12" />
-            <main className="pt-12">{children}</main>
+            <main className="pt-12 flex flex-col items-center">{children}</main>
         </>
     );
 }
