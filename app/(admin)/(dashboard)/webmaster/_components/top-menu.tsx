@@ -11,14 +11,18 @@ import {
 } from "@/components/ui/navigation-menu";
 
 import { sitemap } from "../_data/map";
-import Icon from "@/components/Icon";
+import Icon from "@/components/icon";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { createClient } from "@/utils/supabase/client";
-import { cn } from "@/lib/utils";
+import { ClassName, cn } from "@/lib/utils";
 
-export default function TopMenu() {
+interface Props {
+    className?: ClassName;
+}
+
+export default function TopMenu({ className }: Props) {
     const triggerClass = navigationMenuTriggerStyle();
     const additionnalTriggerClass = "bg-transparent data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 text-nowrap";
 
@@ -28,7 +32,12 @@ export default function TopMenu() {
     };
 
     return (
-        <section className="static top-0 left-0 w-full bg-white bg-opacity-95 backdrop-blur-lg text-black flex justify-between p-1">
+        <section
+            className={cn(
+                "top-0 left-0 w-full bg-white bg-opacity-95 backdrop-blur-lg text-black flex justify-between p-1 z-40",
+                className,
+            )}
+        >
             <NavigationMenu>
                 <NavigationMenuList>
                     {Object.entries(sitemap).map(([key, value]) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import Icon from "@/components/Icon";
+import Icon from "@/components/icon";
 import { Button } from "@/components/ui/button";
 
 export default function HeroButton() {

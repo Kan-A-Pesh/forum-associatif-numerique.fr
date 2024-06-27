@@ -34,6 +34,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      cache: {
+        Row: {
+          key: string
+          owner: string
+          value: string
+        }
+        Insert: {
+          key: string
+          owner?: string
+          value: string
+        }
+        Update: {
+          key?: string
+          owner?: string
+          value?: string
+        }
+        Relationships: []
+      }
       clubs: {
         Row: {
           category: number | null
