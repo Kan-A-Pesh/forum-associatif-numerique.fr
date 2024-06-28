@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import Icon from "./icon";
 import { Status } from "@/types/status";
 import { FileData } from "@/types/assets/file-data";
+import { compress } from "@/utils/image/compress";
 
 interface Props {
     initialImage?: string;
@@ -94,7 +95,10 @@ export default function ImageUploader({
 
     const handleUpload = async (file: File) => {
         const formData = new FormData();
-        formData.append("data", file);
+
+        // Compress image
+        const compressed = await compress(file);
+        formData.append("data", compressed);
         const { data, error } = await onUpload(name, formData);
 
         console.log(data, error, name);

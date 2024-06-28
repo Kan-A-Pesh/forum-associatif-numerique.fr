@@ -14,9 +14,9 @@ export default async function AssetsPage() {
 
             <h2 className="text-2xl font-bold text-white">Hero Image</h2>
             <ImageUploader
-                initialImage={await getPublicUrl("hero.png")}
+                initialImage={await getPublicUrl("hero.jpg")}
                 onUpload={uploadFile}
-                name="hero.png"
+                name="hero.jpg"
                 height={300}
                 width={300}
                 alt="Hero Image"

@@ -8,7 +8,7 @@ export default async function Hero() {
     return (
         <section className="relative min-h-screen min-w-full">
             <Image
-                src={await getPublicUrl("hero.png")}
+                src={await getPublicUrl("hero.jpg")}
                 alt="Hero"
                 className="object-cover object-center w-full h-full absolute -z-10"
                 fill
