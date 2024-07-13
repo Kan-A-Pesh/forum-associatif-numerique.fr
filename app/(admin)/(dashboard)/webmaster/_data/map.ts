@@ -68,4 +68,8 @@ export const sitemap: Map = {
             },
         },
     },
+    languages: {
+        url: `${base}/languages`,
+        title: "Languages",
+    },
 };

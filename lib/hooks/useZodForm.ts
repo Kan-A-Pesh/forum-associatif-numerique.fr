@@ -2,68 +2,82 @@
 
 import { z } from "zod";
 import { Status } from "@/types/status";
-import { useServerAction } from "zsa-react";
 import { useState } from "react";
-import { compress } from "../image/compress";
-import { TAnyZodSafeFunctionHandler } from "zsa";
+import Exchanger from "../exchanger";
 
 export default function useZodForm<K, T extends z.ZodObject<any>>(
     schema: T,
     defaultValues: z.infer<T>,
-    onSubmit: TAnyZodSafeFunctionHandler,
+    onSubmit: (data: FormData) => Promise<Status<K>>,
 ) {
-    const { isPending, execute } = useServerAction(onSubmit);
     const [values, setValues] = useState(defaultValues);
+    const [status, setStatus] = useState<K | null | undefined>(undefined);
+    const [errors, setErrors] = useState<string[]>([]);
+
+    let successCallback: (data: K | null) => void;
+    let errorCallback: (errors: string[]) => void;
+
+    const changeErrors = (errors: string[]) => {
+        setErrors(errors);
+        errors.length > 0 && errorCallback && errorCallback(errors);
+    };
+
+    const changeStatus = (data: K | null | undefined) => {
+        setStatus(data);
+        data !== undefined && successCallback && successCallback(data);
+    };
+
+    const clear = () => {
+        changeStatus(undefined);
+        changeErrors([]);
+    };
 
     const setValue = (key: keyof z.infer<T>, value: any) => {
+        clear();
         setValues((prev) => ({
             ...prev,
             [key]: value,
         }));
     };
 
-    const getFormData = async () => {
-        const formData = new FormData();
-        for (const key in values) {
-            if ((values[key] as any) instanceof File) {
-                formData.append(key, await compress(values[key]));
-            } else {
-                formData.append(key, values[key]);
-            }
-            console.log(typeof values[key]);
-            console.log(formData.get(key));
-        }
-        return formData;
+    const onSuccess = (callback: (data: K | null) => void) => {
+        successCallback = callback;
+    };
+
+    const onError = (callback: (errors: string[]) => void) => {
+        errorCallback = callback;
     };
 
     const submitFunction = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        clear();
+
         const result = schema.safeParse(values);
         if (!result.success) {
-            console.error(result.error.errors);
+            changeErrors(result.error.errors.map((e) => e.message));
             return;
         }
 
-        const formData = await getFormData();
-        const [data, err] = await execute(formData);
+        const formData = await Exchanger.toFormData(schema, values);
 
-        if (err) {
-            console.error("formError", err);
+        if (!formData.success) {
+            changeErrors([formData.error.message]);
             return;
         }
 
-        if (data.error) {
-            console.error("serverError", data.error);
-            return;
-        }
+        const status = await onSubmit(formData.formData);
+        if (!status) return;
 
-        console.log(data.data);
+        status.error ? changeErrors([status.error.message]) : changeStatus(status.data);
+        setValues(defaultValues);
+        return status;
     };
 
     const registerText = (key: keyof z.infer<T>) => ({
         name: key,
         value: values[key] as string,
         onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+            clear();
             setValue(key, e.target.value);
         },
     });
@@ -72,6 +86,7 @@ export default function useZodForm<K, T extends z.ZodObject<any>>(
         name: key,
         value: [values[key] as number],
         onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+            clear();
             setValue(key, Number(e.target.value));
         },
     });
@@ -79,6 +94,7 @@ export default function useZodForm<K, T extends z.ZodObject<any>>(
     const registerFile = (key: keyof z.infer<T>) => ({
         name: key,
         onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+            clear();
             const file = e.target.files?.[0];
             if (file) {
                 setValue(key, file);
@@ -95,6 +111,9 @@ export default function useZodForm<K, T extends z.ZodObject<any>>(
             slider: registerSlider,
             file: registerFile,
         },
-        isPending,
+        status,
+        errors,
+        onSuccess,
+        onError,
     };
 }

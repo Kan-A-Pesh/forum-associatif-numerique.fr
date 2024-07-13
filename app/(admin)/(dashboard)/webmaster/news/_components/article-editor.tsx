@@ -11,15 +11,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Status } from "@/types/status";
 import getHslColor from "@/lib/ui/color";
 import Image from "next/image";
-import { NewsFormSchema } from "../_schema/news-form";
 import { z } from "zod";
 import { timeRangeToString } from "@/lib/ui/time";
 import useZodForm from "@/lib/hooks/useZodForm";
-import { TAnyZodSafeFunctionHandler } from "zsa";
+import { NewsFormSchema } from "@/app/(admin)/_schema/news-form";
 
 interface Props {
     initialArticle?: z.infer<typeof NewsFormSchema>;
-    onPublish: TAnyZodSafeFunctionHandler;
+    onPublish: (article: FormData) => Promise<Status<null>>;
 }
 
 export default function ArticleEditor({ initialArticle, onPublish }: Props) {
@@ -67,12 +66,12 @@ export default function ArticleEditor({ initialArticle, onPublish }: Props) {
                         <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
                             <DatePickerWithRange
                                 date={{
-                                    from: news.start_time ? new Date(news.start_time) : undefined,
-                                    to: news.end_time ? new Date(news.end_time) : undefined,
+                                    from: news.start_time ?? undefined,
+                                    to: news.end_time ?? undefined,
                                 }}
                                 onChangeDate={(dateRange) => {
-                                    setValue("start_time", dateRange?.from?.toISOString() ?? null);
-                                    setValue("end_time", dateRange?.to?.toISOString() ?? null);
+                                    setValue("start_time", dateRange?.from ?? null);
+                                    setValue("end_time", dateRange?.to ?? null);
                                 }}
                                 displayTime={true}
                             />

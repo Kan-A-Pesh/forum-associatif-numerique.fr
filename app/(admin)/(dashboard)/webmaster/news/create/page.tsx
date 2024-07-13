@@ -1,7 +1,7 @@
 "use server";
 
 import Link from "next/link";
-import { createArticle } from "../_actions/create";
+import createArticle from "../_actions/create";
 import ArticleEditor from "../_components/article-editor";
 import Icon from "@/components/common/icon";
 import { Button } from "@/components/ui/button";
