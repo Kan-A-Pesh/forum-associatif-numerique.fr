@@ -1,8 +1,8 @@
 "use server";
 
-import Gallery from "@/components/gallery";
-import ImageUploader from "@/components/image-uploader";
-import { getPublicUrl, listFiles, removeFile, uploadFile } from "@/utils/assets/bucket";
+import Gallery from "@/components/edition/gallery";
+import ImageUploader from "@/components/edition/image-uploader";
+import { getPublicUrl, listFiles, removeFile, uploadFile } from "@/lib/supabase/wrappers/bucket";
 
 export default async function AssetsPage() {
     return (
@@ -14,8 +14,9 @@ export default async function AssetsPage() {
 
             <h2 className="text-2xl font-bold text-white">Hero Image</h2>
             <ImageUploader
-                initialImage={await getPublicUrl("hero.jpg")}
+                initialImage={await getPublicUrl("assets", "hero.jpg")}
                 onUpload={uploadFile}
+                storageName="assets"
                 name="hero.jpg"
                 height={300}
                 width={300}
@@ -23,7 +24,13 @@ export default async function AssetsPage() {
             />
 
             <h2 className="text-2xl font-bold text-white">School Images</h2>
-            <Gallery initialFiles={await listFiles("schools")} folder="schools" uploadAction={uploadFile} removeAction={removeFile} />
+            <Gallery
+                initialFiles={await listFiles("assets", "schools")}
+                folder="schools"
+                uploadAction={uploadFile}
+                storageName="assets"
+                removeAction={removeFile}
+            />
         </section>
     );
 }

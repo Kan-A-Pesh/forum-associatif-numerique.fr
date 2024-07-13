@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import AssetsHero from "@/assets/hero";
-import { LoginForm } from "./login-form";
-import { login } from "./actions";
+import { LoginForm } from "./_components/login-form";
+import { login } from "./_actions/login";
 import getAuth from "@/utils/supabase/auth";
 import { redirect } from "next/navigation";
 

@@ -1,5 +1,3 @@
-import FeatherIconProps from "feather-icons-react";
-
 export type FeatherIconNames =
     | "activity"
     | "airplay"

@@ -1,5 +1,10 @@
 # to-do list
 
+## Project
+
+[ ] Refactor structure
+[ ] Add `eslint`
+
 ## Webmaster features
 
 [x] Navbar

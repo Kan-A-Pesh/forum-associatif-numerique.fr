@@ -1,6 +1,6 @@
 "use server";
 
-import getAuth from "@/utils/supabase/auth";
+import getAuth from "@/lib/supabase/wrappers/auth";
 import { redirect } from "next/navigation";
 
 export default async function ProtectedLayout({ children }: { children: React.ReactNode }) {

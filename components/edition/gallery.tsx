@@ -3,21 +3,22 @@
 import { useState } from "react";
 import ImageUploader from "./image-uploader";
 import { Status } from "@/types/status";
-import Icon from "./icon";
-import { FileData } from "@/types/assets/file-data";
+import { FileData } from "@/types/file-data";
+import Icon from "../common/icon";
 
 interface Props {
     folder?: string;
+    storageName: string;
     initialFiles: FileData[];
-    uploadAction: (name: string, fileFormData: FormData) => Promise<Status<FileData>>;
-    removeAction: (name: string) => Promise<Status<void>>;
+    uploadAction: (storageName: string, name: string, fileFormData: FormData) => Promise<Status<FileData>>;
+    removeAction: (storageName: string, name: string) => Promise<Status<null>>;
 }
 
-export default function Gallery({ folder = "", initialFiles, uploadAction, removeAction }: Props) {
+export default function Gallery({ folder = "", storageName, initialFiles, uploadAction, removeAction }: Props) {
     const [files, setFiles] = useState(initialFiles);
 
-    const handleUpload = async (name: string, fileFormData: FormData) => {
-        const response = await uploadAction(name, fileFormData);
+    const handleUpload = async (storage: string, name: string, fileFormData: FormData) => {
+        const response = await uploadAction(storage, name, fileFormData);
         if (response.data) {
             // Replace the file if it already exists or add a new file
             const index = files.findIndex((file) => file.path === name);
@@ -31,7 +32,7 @@ export default function Gallery({ folder = "", initialFiles, uploadAction, remov
     };
 
     const handleRemove = async (name: string) => {
-        const response = await removeAction(name);
+        const response = await removeAction(storageName, name);
         if (!response.error) setFiles(files.filter((file) => file.path !== name));
         return response;
     };
@@ -46,6 +47,7 @@ export default function Gallery({ folder = "", initialFiles, uploadAction, remov
                     initialImage={file.url}
                     onUpload={handleUpload}
                     name={file.path}
+                    storageName={storageName}
                     height={64}
                     width={64}
                     alt={file.path}
@@ -57,6 +59,7 @@ export default function Gallery({ folder = "", initialFiles, uploadAction, remov
                 key={randomNewId}
                 onUpload={handleUpload}
                 name={randomNewId}
+                storageName={storageName}
                 height={64}
                 width={64}
                 alt="Add Image"

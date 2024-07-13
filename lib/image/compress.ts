@@ -8,7 +8,7 @@ interface CompressOptions {
     maxWidth?: number;
 }
 
-export const compress = async (file: File, options?: CompressOptions): Promise<File | Blob> => {
+export const compress = async (file: File | Blob, options?: CompressOptions): Promise<File | Blob> => {
     return await new Promise((resolve, reject) => {
         new Compressor(file, {
             retainExif: false, // Remove metadata

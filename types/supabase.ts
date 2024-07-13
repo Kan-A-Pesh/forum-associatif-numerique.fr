@@ -54,34 +54,40 @@ export type Database = {
       }
       clubs: {
         Row: {
+          avatar_path: string | null
           category: number | null
           content: Json | null
           created_at: string
-          id: number | null
+          id: number
           lang: number
           slug: string
+          socials: string[] | null
           subtitle: string | null
           title: string
           uuid: number
         }
         Insert: {
+          avatar_path?: string | null
           category?: number | null
           content?: Json | null
           created_at?: string
-          id?: number | null
+          id: number
           lang: number
           slug: string
+          socials?: string[] | null
           subtitle?: string | null
           title: string
           uuid?: number
         }
         Update: {
+          avatar_path?: string | null
           category?: number | null
           content?: Json | null
           created_at?: string
-          id?: number | null
+          id?: number
           lang?: number
           slug?: string
+          socials?: string[] | null
           subtitle?: string | null
           title?: string
           uuid?: number
@@ -116,38 +122,41 @@ export type Database = {
       }
       news: {
         Row: {
+          color: number
           created_at: string
           description: string | null
           end_time: string | null
-          id: number | null
-          lang: number | null
+          id: number
+          lang: number
           metadata: Json | null
           start_time: string | null
-          thumbnail_url: string | null
+          thumbnail_path: string | null
           title: string
           uuid: number
         }
         Insert: {
+          color?: number
           created_at?: string
           description?: string | null
           end_time?: string | null
-          id?: number | null
-          lang?: number | null
+          id: number
+          lang: number
           metadata?: Json | null
           start_time?: string | null
-          thumbnail_url?: string | null
+          thumbnail_path?: string | null
           title: string
           uuid?: number
         }
         Update: {
+          color?: number
           created_at?: string
           description?: string | null
           end_time?: string | null
-          id?: number | null
-          lang?: number | null
+          id?: number
+          lang?: number
           metadata?: Json | null
           start_time?: string | null
-          thumbnail_url?: string | null
+          thumbnail_path?: string | null
           title?: string
           uuid?: number
         }
@@ -168,7 +177,7 @@ export type Database = {
           id: number | null
           lang: number
           number: string
-          thumbnail_url: string | null
+          thumbnail_path: string | null
           title: string
           uuid: number
         }
@@ -178,7 +187,7 @@ export type Database = {
           id?: number | null
           lang: number
           number?: string
-          thumbnail_url?: string | null
+          thumbnail_path?: string | null
           title: string
           uuid?: number
         }
@@ -188,7 +197,7 @@ export type Database = {
           id?: number | null
           lang?: number
           number?: string
-          thumbnail_url?: string | null
+          thumbnail_path?: string | null
           title?: string
           uuid?: number
         }

@@ -1,13 +1,13 @@
 "use client";
 
-import { ClassName, cn } from "@/lib/utils";
+import { ClassName, cn } from "@/lib/ui/cn";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { Button } from "./ui/button";
-import Icon from "./icon";
+import { Button } from "@/components/ui/button";
+import Icon from "@/components/common/icon";
 import { Status } from "@/types/status";
-import { FileData } from "@/types/assets/file-data";
-import { compress } from "@/utils/image/compress";
+import { compress } from "@/lib/image/compress";
+import { FileData } from "@/types/file-data";
 
 interface Props {
     initialImage?: string;
@@ -17,9 +17,10 @@ interface Props {
     reducedCaption?: boolean;
     className?: ClassName;
     children?: React.ReactNode;
-    onUpload: (name: string, fileFormData: FormData) => Promise<Status<FileData>>;
-    remove?: (name: string) => Promise<Status<void>>;
+    onUpload: (storageName: string, name: string, fileFormData: FormData) => Promise<Status<FileData>>;
+    remove?: (name: string) => Promise<Status<null>>;
     name: string;
+    storageName: string;
 }
 
 export default function ImageUploader({
@@ -27,6 +28,7 @@ export default function ImageUploader({
     onUpload,
     remove,
     name,
+    storageName,
     height,
     width,
     alt,
@@ -99,7 +101,7 @@ export default function ImageUploader({
         // Compress image
         const compressed = await compress(file);
         formData.append("data", compressed);
-        const { data, error } = await onUpload(name, formData);
+        const { data, error } = await onUpload(storageName, name, formData);
 
         console.log(data, error, name);
 
