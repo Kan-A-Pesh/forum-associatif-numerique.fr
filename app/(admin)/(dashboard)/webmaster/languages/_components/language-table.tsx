@@ -4,13 +4,13 @@ import { Tables } from "@/types/supabase";
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/common/datatable";
 import deleteLanguage from "../_actions/delete";
-import Exchanger from "@/lib/exchanger";
-import { LanguageFormSchema } from "@/app/(admin)/_schema/language";
+import { LanguageDeleteFormShema } from "@/app/(admin)/_schema/language";
 import Icon from "@/components/common/icon";
 import { toast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { startTransition } from "react";
+import PathImage from "@/components/common/path-image";
 
 interface Props {
     language: Tables<"languages">[];
@@ -24,7 +24,7 @@ export default function LanguageTable({ language }: Props) {
     }
 
     const handleDelete = (language: Tables<"languages">) => async () => {
-        const result = await Exchanger.toFormData(LanguageFormSchema, language);
+        const result = LanguageDeleteFormShema.safeParse(language);
 
         if (!result.success) {
             return toast({
@@ -34,7 +34,7 @@ export default function LanguageTable({ language }: Props) {
             });
         }
 
-        const status = await deleteLanguage(result.formData);
+        const status = await deleteLanguage(result.data);
         if (status.error) {
             return toast({
                 title: status.error.name,
@@ -56,6 +56,13 @@ export default function LanguageTable({ language }: Props) {
         {
             accessorKey: "id",
             header: "ID",
+        },
+        {
+            id: "flag",
+            header: "Flag",
+            cell: ({ row }) => {
+                return <PathImage path={row.original.flag} alt={row.original.name} height={24} width={32} />;
+            },
         },
         {
             accessorKey: "name",

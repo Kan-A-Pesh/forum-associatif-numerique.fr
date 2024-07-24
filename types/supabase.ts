@@ -105,16 +105,22 @@ export type Database = {
       languages: {
         Row: {
           created_at: string
+          display_name: string | null
+          flag: string | null
           id: number
           name: string
         }
         Insert: {
           created_at?: string
+          display_name?: string | null
+          flag?: string | null
           id?: number
           name: string
         }
         Update: {
           created_at?: string
+          display_name?: string | null
+          flag?: string | null
           id?: number
           name?: string
         }
@@ -122,43 +128,40 @@ export type Database = {
       }
       news: {
         Row: {
-          color: number
+          color: number | null
           created_at: string
           description: string | null
           end_time: string | null
-          id: number
+          id: string
           lang: number
           metadata: Json | null
           start_time: string | null
           thumbnail_path: string | null
           title: string
-          uuid: number
         }
         Insert: {
-          color?: number
+          color?: number | null
           created_at?: string
           description?: string | null
           end_time?: string | null
-          id: number
+          id?: string
           lang: number
           metadata?: Json | null
           start_time?: string | null
           thumbnail_path?: string | null
           title: string
-          uuid?: number
         }
         Update: {
-          color?: number
+          color?: number | null
           created_at?: string
           description?: string | null
           end_time?: string | null
-          id?: number
+          id?: string
           lang?: number
           metadata?: Json | null
           start_time?: string | null
           thumbnail_path?: string | null
           title?: string
-          uuid?: number
         }
         Relationships: [
           {

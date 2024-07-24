@@ -14,7 +14,7 @@ export default async function AssetsPage() {
 
             <h2 className="text-2xl font-bold text-white">Hero Image</h2>
             <ImageUploader
-                initialImage={await getPublicUrl("assets", "hero.jpg")}
+                initialImage={await getPublicUrl("hero.jpg", "assets")}
                 onUpload={uploadFile}
                 storageName="assets"
                 name="hero.jpg"
@@ -25,7 +25,7 @@ export default async function AssetsPage() {
 
             <h2 className="text-2xl font-bold text-white">School Images</h2>
             <Gallery
-                initialFiles={await listFiles("assets", "schools")}
+                initialFiles={await listFiles("schools", "assets")}
                 folder="schools"
                 uploadAction={uploadFile}
                 storageName="assets"

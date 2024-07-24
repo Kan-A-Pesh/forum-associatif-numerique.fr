@@ -1,18 +1,19 @@
 "use server";
 
+import { getPublicUrl } from "@/lib/supabase/wrappers/bucket";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 interface Props {
-    avatarUrl?: string;
+    avatarPath?: string | null;
     username?: string;
     quote?: string;
 }
 
-export default async function Profile({ avatarUrl, username, quote }: Props) {
+export default async function Profile({ avatarPath, username, quote }: Props) {
     return (
         <article className="flex gap-2 justify-center items-center">
             <Avatar>
-                <AvatarImage src={avatarUrl} alt={username} />
+                <AvatarImage src={avatarPath ? await getPublicUrl(avatarPath) : undefined} alt={username} />
                 <AvatarFallback>{username ?? "★"}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col gap-2">

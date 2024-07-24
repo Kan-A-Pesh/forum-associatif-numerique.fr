@@ -10,15 +10,15 @@ interface Props {
     folder?: string;
     storageName: string;
     initialFiles: FileData[];
-    uploadAction: (storageName: string, name: string, fileFormData: FormData) => Promise<Status<FileData>>;
-    removeAction: (storageName: string, name: string) => Promise<Status<null>>;
+    uploadAction: (name: string, fileFormData: FormData, storageName: string) => Promise<Status<FileData>>;
+    removeAction: (name: string, storageName: string) => Promise<Status<null>>;
 }
 
 export default function Gallery({ folder = "", storageName, initialFiles, uploadAction, removeAction }: Props) {
     const [files, setFiles] = useState(initialFiles);
 
-    const handleUpload = async (storage: string, name: string, fileFormData: FormData) => {
-        const response = await uploadAction(storage, name, fileFormData);
+    const handleUpload = async (name: string, fileFormData: FormData, storage: string) => {
+        const response = await uploadAction(name, fileFormData, storage);
         if (response.data) {
             // Replace the file if it already exists or add a new file
             const index = files.findIndex((file) => file.path === name);
@@ -32,7 +32,7 @@ export default function Gallery({ folder = "", storageName, initialFiles, upload
     };
 
     const handleRemove = async (name: string) => {
-        const response = await removeAction(storageName, name);
+        const response = await removeAction(name, storageName);
         if (!response.error) setFiles(files.filter((file) => file.path !== name));
         return response;
     };

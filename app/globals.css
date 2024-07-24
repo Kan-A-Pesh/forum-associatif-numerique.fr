@@ -82,3 +82,30 @@
         margin: 0;
     }
 }
+
+.anim\:danger-shake {
+    animation: danger-shake 0.5s ease-in-out;
+}
+
+@keyframes danger-shake {
+    0% {
+        transform: translateX(0);
+        background: red;
+    }
+    12.5% {
+        transform: translateX(-1rem);
+    }
+    25% {
+        transform: translateX(0.75rem);
+    }
+    50% {
+        transform: translateX(-0.5rem);
+    }
+    75% {
+        transform: translateX(0.25rem);
+    }
+    100% {
+        transform: translateX(0);
+        background: black;
+    }
+}

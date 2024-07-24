@@ -1,5 +1,6 @@
 "use server";
 
+import MediaWrapper from "@/components/media/media-wrapper";
 import getAuth from "@/lib/supabase/wrappers/auth";
 import { redirect } from "next/navigation";
 
@@ -10,5 +11,10 @@ export default async function ProtectedLayout({ children }: { children: React.Re
         return redirect("/login");
     }
 
-    return <>{children}</>;
+    return (
+        <>
+            {children}
+            <MediaWrapper />
+        </>
+    );
 }

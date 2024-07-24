@@ -8,7 +8,7 @@ export default async function Hero() {
     return (
         <section className="relative min-h-screen min-w-full">
             <Image
-                src={await getPublicUrl("assets", "hero.jpg")}
+                src={await getPublicUrl("hero.jpg", "assets")}
                 alt="Hero"
                 className="object-cover object-center w-full h-full absolute -z-10"
                 fill
@@ -28,7 +28,7 @@ export default async function Hero() {
                     </div>
 
                     <div className="flex justify-end gap-2">
-                        {(await listFiles("assets", "schools")).map((files, index) => (
+                        {(await listFiles("schools", "assets")).map((files, index) => (
                             <Image key={index} src={files.url} alt="School image" width={48} height={48} />
                         ))}
                     </div>

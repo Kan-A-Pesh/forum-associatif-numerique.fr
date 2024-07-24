@@ -17,7 +17,7 @@ interface Props {
     reducedCaption?: boolean;
     className?: ClassName;
     children?: React.ReactNode;
-    onUpload: (storageName: string, name: string, fileFormData: FormData) => Promise<Status<FileData>>;
+    onUpload: (name: string, fileFormData: FormData, storageName: string) => Promise<Status<FileData>>;
     remove?: (name: string) => Promise<Status<null>>;
     name: string;
     storageName: string;
@@ -101,9 +101,7 @@ export default function ImageUploader({
         // Compress image
         const compressed = await compress(file);
         formData.append("data", compressed);
-        const { data, error } = await onUpload(storageName, name, formData);
-
-        console.log(data, error, name);
+        const { data, error } = await onUpload(name, formData, storageName);
 
         setSelectedImage(null);
         setError(error?.message ?? null);

@@ -72,4 +72,8 @@ export const sitemap: Map = {
         url: `${base}/languages`,
         title: "Languages",
     },
+    medias: {
+        url: `${base}/medias`,
+        title: "Medias",
+    },
 };

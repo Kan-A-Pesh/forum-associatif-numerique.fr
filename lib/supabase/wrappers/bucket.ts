@@ -13,16 +13,19 @@ export async function getStorage(name: string) {
     return { supabase, cache, storage };
 }
 
-export async function getPublicUrl(storageName: string, filePath: string, assetStorage?: any): Promise<string> {
+export async function getPublicUrl(filePath: string, storageName: string = "images", assetStorage?: any): Promise<string> {
     const { cache, storage } = assetStorage ?? (await getStorage(storageName));
     const { data } = await cache.select("value").limit(1).eq("key", md5hash(filePath)).maybeSingle();
     return storage.getPublicUrl(filePath).data.publicUrl + (data ? "?v=" + data.value : "");
 }
 
-export async function listFiles(storageName: string, folderPath: string): Promise<FileData[]> {
+export async function listFiles(folderPath: string, storageName: string = "images"): Promise<FileData[]> {
     const assetStorage = await getStorage(storageName);
 
-    const fileList = await assetStorage.storage.list(folderPath);
+    const fileList = await assetStorage.storage.list(folderPath, {
+        sortBy: { column: "updated_at", order: "desc" },
+    });
+
     if (fileList.error) return [];
 
     const files = await Promise.all(
@@ -30,16 +33,20 @@ export async function listFiles(storageName: string, folderPath: string): Promis
             const filePath = folderPath + "/" + file.name;
             return {
                 path: filePath,
-                url: await getPublicUrl("", filePath, assetStorage),
+                url: await getPublicUrl(filePath, "", assetStorage),
             };
         }),
     );
     return files ?? [];
 }
 
-export async function uploadFile(storageName: string, filePath: string, file: File): Promise<Status<FileData>>;
-export async function uploadFile(storageName: string, filePath: string, formData: FormData): Promise<Status<FileData>>;
-export async function uploadFile(storageName: string, filePath: string, fileFormData: FormData | File): Promise<Status<FileData>> {
+export async function uploadFile(filePath: string, file: File, storageName?: string): Promise<Status<FileData>>;
+export async function uploadFile(filePath: string, formData: FormData, storageName?: string): Promise<Status<FileData>>;
+export async function uploadFile(
+    filePath: string,
+    fileFormData: FormData | File,
+    storageName: string = "images",
+): Promise<Status<FileData>> {
     const file = fileFormData instanceof File ? fileFormData : (fileFormData.get("data") as File);
 
     if (!file) {
@@ -62,14 +69,14 @@ export async function uploadFile(storageName: string, filePath: string, fileForm
     if (data) {
         return SuccessStatus({
             path: filePath,
-            url: await getPublicUrl("", filePath, storage),
+            url: await getPublicUrl(filePath, "", storage),
         });
     }
 
     return ErrorStatus(error);
 }
 
-export async function removeFile(storageName: string, filePath: string): Promise<Status<null>> {
+export async function removeFile(filePath: string, storageName: string = "images"): Promise<Status<null>> {
     const storage = await getStorage(storageName);
 
     const { error } = await storage.storage.remove([filePath]);

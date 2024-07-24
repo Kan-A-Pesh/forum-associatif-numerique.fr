@@ -8,42 +8,48 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { Status } from "@/types/status";
 import getHslColor from "@/lib/ui/color";
-import Image from "next/image";
 import { z } from "zod";
 import { timeRangeToString } from "@/lib/ui/time";
 import useZodForm from "@/lib/hooks/useZodForm";
 import { NewsFormSchema } from "@/app/(admin)/_schema/news-form";
+import EditorProps from "@/components/edition/i18n/editor";
+import MediaInput from "@/components/media/media-input";
 
-interface Props {
-    initialArticle?: z.infer<typeof NewsFormSchema>;
-    onPublish: (article: FormData) => Promise<Status<null>>;
-}
-
-export default function ArticleEditor({ initialArticle, onPublish }: Props) {
+export default function ArticleEditor({
+    initial = undefined,
+    base = undefined,
+    id,
+    lang,
+    onValuesChange,
+    onSubmit,
+}: EditorProps<z.infer<typeof NewsFormSchema>>) {
     const {
         values: news,
         setValue,
         submitFunction,
         register,
+        errors,
     } = useZodForm(
         NewsFormSchema,
-        initialArticle ?? {
-            lang: 0,
-            color: 0,
+        initial ?? {
+            id: base?.id ?? id ?? undefined,
+            lang: lang,
+            color: null,
             title: "",
-            description: "",
+            description: null,
             start_time: null,
             end_time: null,
-            metadata: null,
-            thumbnail: null,
+            thumbnail_path: null,
         },
-        onPublish,
+        onSubmit,
+        onValuesChange,
     );
 
-    const newsColorHsl = getHslColor(news.color);
-    const newsTime = timeRangeToString(news.start_time, news.end_time);
+    const newsColorHsl = getHslColor(news.color ?? base?.color ?? -1);
+    const color = news.color ?? base?.color ?? 0;
+    const metadata = news.metadata ?? base?.metadata ?? null;
+    const newsTime = timeRangeToString(news.start_time ?? base?.start_time ?? null, news.end_time ?? base?.end_time ?? null);
 
     return (
         <form onSubmit={submitFunction}>
@@ -58,25 +64,27 @@ export default function ArticleEditor({ initialArticle, onPublish }: Props) {
                 <header className="flex gap-4 w-full flex-col mb-8">
                     <div className="flex flex-col gap-1.5">
                         <Label>Title</Label>
-                        <Input placeholder="Title" size={32} {...register.text("title")} />
-                        {/* {validationErrors?.title?.message && <span className="text-red-500">{validationErrors.title.message}</span>} */}
+                        <Input placeholder={base?.title} size={32} {...register.text("title")} />
+                        {errors["title"] && <p className="text-red-500">{errors["title"]}</p>}
                     </div>
                     <div className="flex flex-col gap-1.5">
                         <Label>Time Range</Label>
                         <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
                             <DatePickerWithRange
                                 date={{
-                                    from: news.start_time ?? undefined,
-                                    to: news.end_time ?? undefined,
+                                    from: news.start_time ? new Date(news.start_time) : undefined,
+                                    to: news.end_time ? new Date(news.end_time) : undefined,
                                 }}
                                 onChangeDate={(dateRange) => {
-                                    setValue("start_time", dateRange?.from ?? null);
-                                    setValue("end_time", dateRange?.to ?? null);
+                                    setValue("start_time", dateRange?.from?.toISOString() ?? null);
+                                    setValue("end_time", dateRange?.to?.toISOString() ?? null);
                                 }}
                                 displayTime={true}
                             />
                             <span className="border border-white rounded-sm px-2 py-1 text-white text-base">{newsTime}</span>
                         </div>
+                        {(errors["start_time"] && <p className="text-red-500">{errors["start_time"]}</p>) ??
+                            (errors["end_time"] && <p className="text-red-500">{errors["end_time"]}</p>)}
                     </div>
                     <div className="flex flex-col gap-1.5">
                         <Label>Color</Label>
@@ -84,70 +92,93 @@ export default function ArticleEditor({ initialArticle, onPublish }: Props) {
                             <div className="p-4 py-2 bg-black border border-input flex items-center gap-2">
                                 <Switch
                                     id="add-news_no-color"
-                                    checked={news.color === -1}
+                                    checked={color === -1}
                                     onCheckedChange={(state) => setValue("color", state ? -1 : 0)}
                                 />
                                 <Label htmlFor="add-news_no-color">No color</Label>
                             </div>
                             <div
                                 className="p-4 rounded-md bg-black border border-input max-w-64 grow grid place-items-center"
-                                style={{ opacity: news.color === -1 ? 0.5 : 1 }}
+                                style={{ opacity: color === -1 ? 0.5 : 1 }}
                             >
-                                <Slider min={0} max={360} disabled={news.color === -1} {...register.slider("color")} />
+                                <Slider min={0} max={360} disabled={color === -1} {...register.slider("color")} />
                             </div>
                         </div>
+                        {errors["color"] && <p className="text-red-500">{errors["color"]}</p>}
                     </div>
                 </header>
                 <h3 className="text-2xl font-bold opacity-75 mb-4">News content</h3>
                 <div className="flex gap-6 flex-col md:flex-row">
-                    <div className="bg-gray-500 bg-opacity-25 flex flex-col justify-center items-center w-[350px] h-[250px] rounded-lg shrink-0 max-w-[80vw] relative">
-                        {news.thumbnail ? (
-                            <Image
-                                src={URL.createObjectURL(news.thumbnail)}
-                                alt={news.title}
-                                width={350}
-                                height={250}
-                                className="rounded-lg object-cover w-[350px] h-[250px]"
-                            />
-                        ) : (
-                            <>
-                                <Icon icon="upload" className="w-6 h-6" />
-                                <span>Upload</span>
-                            </>
-                        )}
-                        <input
-                            type="file"
-                            accept="image/*"
-                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                            {...register.file("thumbnail")}
+                    <div>
+                        <MediaInput
+                            className="max-w-[80vw]"
+                            placeholder={base?.thumbnail_path}
+                            {...register.text("thumbnail_path")}
+                            height={250}
+                            width={350}
                         />
+                        {errors["thumbnail_path"] && <p className="text-red-500">{errors["thumbnail_path"]}</p>}
                     </div>
                     <div className="flex flex-col gap-4 w-full">
-                        {news.metadata && Object.hasOwn(news.metadata as Object, "location") ? (
+                        {metadata?.location !== undefined ? (
                             <div className="flex gap-1 items-center">
-                                <Icon icon="map-pin" className="text-gray-600" size={16} />
-                                <span className="text-gray-600 text-sm font-bold">{(news.metadata as any).location}</span>
+                                <Icon icon="map-pin" className="text-gray-300 me-2" size={24} />
+                                <Input
+                                    placeholder={metadata.location ?? "Location"}
+                                    className="w-full"
+                                    {...register.text("metadata.location" as any)}
+                                />
+                                <Button
+                                    variant="destructive"
+                                    onClick={() =>
+                                        setValue("metadata", (prev) => {
+                                            const { location, ...rest } = prev ?? {};
+                                            return rest;
+                                        })
+                                    }
+                                >
+                                    <Icon icon="x" className="text-gray-300" size={16} />
+                                </Button>
                             </div>
                         ) : (
-                            <Button variant="secondary">
-                                <Icon icon="map-pin" className="text-gray-600" size={16} />
-                                <span className="text-gray-600 text-sm font-bold">Add Location</span>
+                            <Button
+                                variant="outline"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setValue("metadata", (prev) => {
+                                        console.log(prev);
+                                        console.log({ ...prev, location: "" });
+                                        return { ...prev, location: "" };
+                                    });
+                                }}
+                            >
+                                <Icon icon="map-pin" className="text-gray-300 me-2" size={16} />
+                                <span className="text-gray-300 text-sm font-bold">Add Location</span>
                             </Button>
                         )}
 
                         <div className="grow">
-                            <div className="flex flex-col w-full gap-1.5">
+                            <div className="flex flex-col m-full gap-1.5">
                                 <Label htmlFor="message">Description</Label>
-                                <Textarea placeholder="Write anything..." className="w-full" {...register.text("description")} />
+                                <Textarea
+                                    placeholder={base?.description ?? "Write anything..."}
+                                    className="w-full"
+                                    {...register.text("description")}
+                                />
+                                {errors["description"] && <p className="text-red-500">{errors["description"]}</p>}
                             </div>
                         </div>
                     </div>
                 </div>
             </article>
 
-            <Button className="mt-4" size="lg" type="submit">
-                Publish article!
-            </Button>
+            {errors["_server"] && <p className="text-red-500 mt-2">{errors["_server"]}</p>}
+
+            {onSubmit && (
+                <Button type="submit" className="mt-4" size="lg">
+                    Create article
+                </Button>
+            )}
         </form>
     );
 }

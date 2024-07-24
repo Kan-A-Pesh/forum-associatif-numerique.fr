@@ -1,6 +1,8 @@
 import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/ui/cn";
+import Flag from "@/components/common/i18n/flag";
+import { Toaster } from "@/components/ui/toaster";
 
 const defaultUrl = process.env.NEXT_PUBLIC_URL ? `https://${process.env.NEXT_PUBLIC_URL}` : "http://localhost:3000";
 
@@ -18,7 +20,11 @@ const fontSans = Hanken_Grotesk({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en" className="dark">
-            <body className={cn("min-h-screen font-sans antialiased", fontSans.variable)}>{children}</body>
+            <body className={cn("min-h-screen font-sans antialiased", fontSans.variable)}>
+                {children}
+                <Toaster />
+                <Flag />
+            </body>
         </html>
     );
 }
