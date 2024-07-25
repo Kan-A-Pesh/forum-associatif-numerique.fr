@@ -27,11 +27,12 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
     const router = useRouter();
     const [activeLang, setActiveLang] = useState(defaultLanguage);
     const [modifiedData, setModifiedData] = useState([...data]);
+    const [pushedData, setPushedData] = useState([...data]);
     const [refreshKey, setRefreshKey] = useState(0);
     const bannerRef = useRef<HTMLDivElement>(null);
 
     const changesMade = modifiedData.some((row) => {
-        const base = data.find((r) => r.lang == row.lang);
+        const base = pushedData.find((r) => r.lang == row.lang);
         return JSON.stringify(row) !== JSON.stringify(base);
     });
 
@@ -42,9 +43,6 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
             }),
         );
 
-        router.refresh();
-        setRefreshKey((prev) => prev + 1);
-
         const errorCount = result.filter((r) => r?.error).length;
 
         if (errorCount === 0) {
@@ -52,6 +50,8 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
                 title: "Changes saved",
                 description: "The changes have been saved successfully",
             });
+
+            setPushedData([...modifiedData]);
         } else {
             toast({
                 title: "Oops",
@@ -59,6 +59,8 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
                 variant: "destructive",
             });
         }
+
+        router.refresh();
     };
 
     const handleCancel = () => {
@@ -94,8 +96,8 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
             </div>
             <Editor
                 key={activeLang + refreshKey}
-                initial={data.find((row) => row.lang == activeLang)}
-                base={data.find((row) => row.lang == defaultLanguage)}
+                initial={pushedData.find((row) => row.lang == activeLang)}
+                base={pushedData.find((row) => row.lang == defaultLanguage)}
                 id={fallbackUUID}
                 lang={activeLang}
                 onValuesChange={(values) => {

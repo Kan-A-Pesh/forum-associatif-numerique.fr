@@ -65,6 +65,10 @@ export const sitemap: Map = {
                     url: `/clubs`,
                     title: "View clubs page",
                 },
+                categories: {
+                    url: `${base}/categories`,
+                    title: "Categories",
+                },
             },
         },
     },

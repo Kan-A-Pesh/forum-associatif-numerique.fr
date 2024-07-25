@@ -1,11 +1,11 @@
 import { createClient } from "@/lib/supabase/agents/server";
 import { ErrorStatus, SuccessStatus } from "@/types/status";
 
-export default async function deleteArticle(id: string) {
+export default async function deleteCategory(id: string) {
     const supabase = await createClient();
 
     try {
-        const { error } = await supabase.from("news").delete().match({ id });
+        const { error } = await supabase.from("categories").delete().match({ id });
 
         if (error) return ErrorStatus(error);
 

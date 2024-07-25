@@ -1,3 +1,5 @@
+"use server";
+
 import { createClient } from "@/lib/supabase/agents/server";
 import { ErrorStatus, SuccessStatus } from "@/types/status";
 

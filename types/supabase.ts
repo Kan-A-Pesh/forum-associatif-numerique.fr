@@ -52,47 +52,72 @@ export type Database = {
         }
         Relationships: []
       }
+      categories: {
+        Row: {
+          created_at: string
+          icon: string | null
+          id: string
+          lang: number
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          icon?: string | null
+          id?: string
+          lang: number
+          name: string
+        }
+        Update: {
+          created_at?: string
+          icon?: string | null
+          id?: string
+          lang?: number
+          name?: string
+        }
+        Relationships: []
+      }
       clubs: {
         Row: {
           avatar_path: string | null
-          category: number | null
+          category: string | null
           content: Json | null
           created_at: string
-          id: number
           lang: number
           slug: string
           socials: string[] | null
           subtitle: string | null
           title: string
-          uuid: number
         }
         Insert: {
           avatar_path?: string | null
-          category?: number | null
+          category?: string | null
           content?: Json | null
           created_at?: string
-          id: number
           lang: number
           slug: string
           socials?: string[] | null
           subtitle?: string | null
           title: string
-          uuid?: number
         }
         Update: {
           avatar_path?: string | null
-          category?: number | null
+          category?: string | null
           content?: Json | null
           created_at?: string
-          id?: number
           lang?: number
           slug?: string
           socials?: string[] | null
           subtitle?: string | null
           title?: string
-          uuid?: number
         }
         Relationships: [
+          {
+            foreignKeyName: "public_clubs_category_lang_fkey"
+            columns: ["category", "lang"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id", "lang"]
+          },
           {
             foreignKeyName: "public_clubs_lang_fkey"
             columns: ["lang"]
@@ -166,47 +191,6 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "public_news_lang_fkey"
-            columns: ["lang"]
-            isOneToOne: false
-            referencedRelation: "languages"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      stats: {
-        Row: {
-          created_at: string
-          description: string | null
-          id: number | null
-          lang: number
-          number: string
-          thumbnail_path: string | null
-          title: string
-          uuid: number
-        }
-        Insert: {
-          created_at?: string
-          description?: string | null
-          id?: number | null
-          lang: number
-          number?: string
-          thumbnail_path?: string | null
-          title: string
-          uuid?: number
-        }
-        Update: {
-          created_at?: string
-          description?: string | null
-          id?: number | null
-          lang?: number
-          number?: string
-          thumbnail_path?: string | null
-          title?: string
-          uuid?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "public_stats_lang_fkey"
             columns: ["lang"]
             isOneToOne: false
             referencedRelation: "languages"

@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/agents/server";
-import NewsCard from "./news";
+import NewsCard from "./_components/news-card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/common/icon";

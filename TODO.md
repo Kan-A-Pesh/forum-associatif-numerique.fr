@@ -2,19 +2,24 @@
 
 ## Project
 
-[ ] Refactor structure
+[x] Refactor structure
 [ ] Add `eslint`
 
 ## Webmaster features
 
 [x] Navbar
-[ ] Dashboard
+[x] Landing page images
+[ ] Landing page stats
+[x] News
+[x] Categories
+[ ] Clubs
+[x] Languages
 
-### Assets management
+### Assets management (medias)
 
-[ ] View assets
-[ ] Edit assets
-[ ] Preview assets
+[x] View assets
+[x] Edit assets
+[x] Preview assets
 
 ### Clubs management
 
