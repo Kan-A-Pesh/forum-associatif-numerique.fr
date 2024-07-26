@@ -48,11 +48,11 @@ export async function submit<T extends z.ZodObject<any>>(
     }
 
     const status = await onSubmit(result.data);
-    if (status.error) {
+    if (status?.error) {
         return { errors: parseServerError(status.error.message), data: undefined };
     }
 
-    return { data: status.data, errors: undefined };
+    return { data: status?.data, errors: undefined };
 }
 
 export default function useZodForm<K, T extends z.ZodObject<any>>(

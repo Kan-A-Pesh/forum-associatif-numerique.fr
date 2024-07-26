@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { startTransition, useRef, useState } from "react";
 import { Button } from "../../ui/button";
 import { Props as WrapperProps } from "./lang-wrapper";
 import { useRouter } from "next/navigation";
@@ -43,7 +43,10 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
             }),
         );
 
-        const errorCount = result.filter((r) => r?.error).length;
+        const errorCount = result.filter((r) => {
+            if (r?.error) console.error(r.error);
+            return r?.error;
+        }).length;
 
         if (errorCount === 0) {
             toast({
@@ -60,7 +63,7 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
             });
         }
 
-        router.refresh();
+        startTransition(router.refresh);
     };
 
     const handleCancel = () => {

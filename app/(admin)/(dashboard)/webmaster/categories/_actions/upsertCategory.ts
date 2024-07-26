@@ -11,26 +11,19 @@ export default async function upsertCategory(data: any): Promise<Status<Tables<"
     if (!result.success) return ErrorStatus("Invalid form data", result.error.message);
 
     const category = result.data;
-
     const supabase = await createClient();
-
     const id = category.id ?? randomUUID();
 
-    try {
-        const { data, error } = await supabase
-            .from("categories")
-            .upsert({
-                id: id,
-                lang: category.lang,
-                name: category.name,
-                icon: category.icon,
-            })
-            .select("*");
+    const { data: res, error } = await supabase
+        .from("categories")
+        .upsert({
+            id: id,
+            lang: category.lang,
+            name: category.name,
+            icon: category.icon,
+        })
+        .select("*");
 
-        if (error) return ErrorStatus(error);
-
-        return SuccessStatus(data);
-    } catch (err) {
-        return ErrorStatus(err as Error);
-    }
+    if (error) return ErrorStatus(error);
+    return SuccessStatus(res);
 }

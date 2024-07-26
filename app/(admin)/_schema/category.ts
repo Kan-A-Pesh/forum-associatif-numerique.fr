@@ -7,7 +7,3 @@ export const CategoryFormSchema = z.object({
     name: z.string().min(2).max(255),
     icon: z.string().nullable(),
 });
-
-export const CategoryDeleteSchema = z.object({
-    id: z.string().uuid(),
-});

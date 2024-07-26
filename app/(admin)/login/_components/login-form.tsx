@@ -15,7 +15,7 @@ export function LoginForm({ login, error }: Props) {
 
     return (
         <form action={login}>
-            <section className="flex-1 flex flex-col gap-4 bg-white border border-gray-300 text-black rounded-2xl p-8">
+            <section className="flex-1 flex flex-col gap-4 bg-black border rounded-2xl p-8">
                 <h1 className="text-2xl font-bold text-center">Login</h1>
 
                 <div className="grid w-full max-w-sm items-center gap-1.5">

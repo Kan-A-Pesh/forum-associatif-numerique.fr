@@ -8,6 +8,7 @@ import { toast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import deleteCategory from "../_actions/deleteCategory";
 import { Button } from "@/components/ui/button";
+import { startTransition } from "react";
 
 interface Props {
     categoryList: Tables<"categories">[];
@@ -28,7 +29,7 @@ export default function CategoryCard({ categoryList }: Props) {
             });
         }
 
-        router.refresh();
+        startTransition(router.refresh);
     };
 
     return (

@@ -25,7 +25,7 @@ export default async function CategoryCreatePage() {
                         <span>Back to categories</span>
                     </Button>
                 </Link>
-                <h1 className="text-4xl font-bold text-white mt-2">Create an article</h1>
+                <h1 className="text-4xl font-bold text-white mt-2">Create a category</h1>
             </header>
             <LangWrapper data={[]} editor={CategoryEditor} onSubmit={submit} />
         </section>

@@ -12,31 +12,24 @@ export default async function upsertArticle(data: any): Promise<Status<Tables<"n
     if (!result.success) return ErrorStatus("Invalid form data", result.error.message);
 
     const news = result.data;
-
     const supabase = await createClient();
-
     const id = news.id ?? randomUUID();
 
-    try {
-        const { data, error } = await supabase
-            .from("news")
-            .upsert({
-                color: news.color,
-                description: news.description,
-                end_time: news.end_time,
-                lang: await fallbackLanguage(news.lang),
-                metadata: news.metadata,
-                start_time: news.start_time,
-                thumbnail_path: news.thumbnail_path,
-                title: news.title,
-                id: id,
-            })
-            .select("*");
+    const { data: res, error } = await supabase
+        .from("news")
+        .upsert({
+            color: news.color,
+            description: news.description,
+            end_time: news.end_time,
+            lang: await fallbackLanguage(news.lang),
+            metadata: news.metadata,
+            start_time: news.start_time,
+            thumbnail_path: news.thumbnail_path,
+            title: news.title,
+            id: id,
+        })
+        .select("*");
 
-        if (error) return ErrorStatus(error);
-
-        return SuccessStatus(data);
-    } catch (err) {
-        return ErrorStatus(err as Error);
-    }
+    if (error) return ErrorStatus(error);
+    return SuccessStatus(res);
 }

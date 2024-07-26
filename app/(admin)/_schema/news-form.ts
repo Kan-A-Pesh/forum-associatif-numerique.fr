@@ -16,7 +16,8 @@ export const NewsFormSchema = z.object({
             location: z.string().max(255).optional(),
             link: z.string().url().optional(),
         })
-        .optional(),
+        .optional()
+        .nullable(),
 
     thumbnail_path: z.string().nullable(),
 });

@@ -82,8 +82,8 @@ export type Database = {
           category: string | null
           content: Json | null
           created_at: string
+          id: string
           lang: number
-          slug: string
           socials: string[] | null
           subtitle: string | null
           title: string
@@ -93,8 +93,8 @@ export type Database = {
           category?: string | null
           content?: Json | null
           created_at?: string
+          id: string
           lang: number
-          slug: string
           socials?: string[] | null
           subtitle?: string | null
           title: string
@@ -104,8 +104,8 @@ export type Database = {
           category?: string | null
           content?: Json | null
           created_at?: string
+          id?: string
           lang?: number
-          slug?: string
           socials?: string[] | null
           subtitle?: string | null
           title?: string

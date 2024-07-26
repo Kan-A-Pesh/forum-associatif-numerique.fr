@@ -15,6 +15,7 @@
 
 # production
 /build
+/mail/
 
 # misc
 .DS_Store

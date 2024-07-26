@@ -24,8 +24,8 @@
 ### Clubs management
 
 [ ] View all clubs
-[ ] Create club account
-[ ] Delete club account
+[x] Create club account
+[x] Delete club account
 [ ] Reroll club account
 [ ] View club page
 
@@ -65,4 +65,4 @@
 [ ] Monitoring
 [ ] Logging
 [ ] Caching
-[ ] Feedback
+[x] Feedback

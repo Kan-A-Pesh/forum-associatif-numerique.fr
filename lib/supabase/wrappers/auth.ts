@@ -4,7 +4,7 @@ import { User } from "@supabase/supabase-js";
 import { createClient } from "../agents/server";
 
 interface AuthStatus {
-    supabase: ReturnType<typeof createClient>;
+    supabase: any;
     user: User | null;
 }
 
@@ -20,5 +20,6 @@ export default async function getAuth(): Promise<AuthStatus> {
 
 export async function logOut() {
     const supabase = await createClient();
-    supabase.auth.signOut();
+    await supabase.auth.signOut();
+    return null;
 }

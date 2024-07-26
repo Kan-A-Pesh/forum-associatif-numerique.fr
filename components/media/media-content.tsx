@@ -5,7 +5,7 @@ import { FileData } from "@/types/file-data";
 import Icon from "../common/icon";
 import Image from "next/image";
 import { toast } from "../ui/use-toast";
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import { compress } from "@/lib/image/compress";
 import { useMediaStore } from "@/lib/stores/media";
 import { deleteMedia, uploadMedia } from "./media-actions";
@@ -31,7 +31,7 @@ export default function MediaContent({ files, className }: Props) {
                     variant: "destructive",
                 });
             } else {
-                router.refresh();
+                startTransition(router.refresh);
             }
         } else {
             mediaStore.savedCallback(file);
@@ -70,7 +70,7 @@ export default function MediaContent({ files, className }: Props) {
                 });
             }
 
-            router.refresh();
+            startTransition(router.refresh);
         };
         input.click();
     };

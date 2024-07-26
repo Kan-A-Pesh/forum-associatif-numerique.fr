@@ -10,24 +10,25 @@ import {
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
-import { sitemap } from "../_data/map";
 import Icon from "@/components/common/icon";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { ClassName, cn } from "@/lib/ui/cn";
+import { cn } from "@/lib/ui/cn";
 import { logOut } from "@/lib/supabase/wrappers/auth";
+import { Map } from "@/types/map";
 
 interface Props {
-    className?: ClassName;
+    username: string;
+    sitemap: Map;
 }
 
-export default function TopMenu({ className }: Props) {
+export default function TopMenu({ username, sitemap }: Props) {
     const triggerClass = navigationMenuTriggerStyle();
     const additionnalTriggerClass = "bg-transparent data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 text-nowrap";
 
     return (
-        <section className={cn("top-0 left-0 w-full backdrop-blur-lg flex justify-between p-1 z-40", className)}>
+        <section className="top-0 left-0 w-full backdrop-blur-lg flex justify-between p-1 z-40 fixed h-12">
             <NavigationMenu>
                 <NavigationMenuList>
                     {Object.entries(sitemap).map(([key, value]) => {
@@ -77,12 +78,23 @@ export default function TopMenu({ className }: Props) {
             <Popover>
                 <PopoverTrigger>
                     <Avatar>
-                        <AvatarFallback className="bg-black bg-opacity-20">WM</AvatarFallback>
+                        <AvatarFallback className="bg-black bg-opacity-20">
+                            {username
+                                .split(" ")
+                                .map((name) => name[0].toUpperCase())
+                                .join("")}
+                        </AvatarFallback>
                     </Avatar>
                 </PopoverTrigger>
                 <PopoverContent className="mt-1 me-1">
-                    <p className="text-center">Connected as Webmaster</p>
-                    <Button className="w-full" variant="destructive" onClick={logOut}>
+                    <p className="text-center">Connected as {username}</p>
+                    <Button
+                        className="w-full"
+                        variant="destructive"
+                        onClick={async () => {
+                            await logOut();
+                        }}
+                    >
                         Sign out
                     </Button>
                 </PopoverContent>

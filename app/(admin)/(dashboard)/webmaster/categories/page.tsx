@@ -13,7 +13,7 @@ export default async function CategoriesPage() {
 
     const { data, error } = await supabase.from("categories").select("*");
 
-    const categories = data && data.length > 0 ? await packLangs(data) : [];
+    const categories = data && data.length > 0 ? await packLangs(data) : {};
 
     return (
         <section className="flex flex-col gap-y-4 p-4 md:p-8 lg:p-12 w-full max-w-4xl">

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import deleteArticle from "../_actions/deleteArticle";
 import { toast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import { startTransition } from "react";
 
 interface Props {
     id: string;
@@ -23,7 +24,7 @@ export default function ArticleDelete({ id }: Props) {
             });
         }
 
-        router.refresh();
+        startTransition(router.refresh);
     };
 
     return (

@@ -3,14 +3,14 @@
 import { Tables } from "@/types/supabase";
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/common/datatable";
-import deleteLanguage from "../_actions/delete";
-import { LanguageDeleteFormShema } from "@/app/(admin)/_schema/language";
+import deleteLanguage from "../_actions/deleteLanguage";
 import Icon from "@/components/common/icon";
 import { toast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { startTransition } from "react";
 import PathImage from "@/components/common/path-image";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 interface Props {
     language: Tables<"languages">[];
@@ -24,17 +24,7 @@ export default function LanguageTable({ language }: Props) {
     }
 
     const handleDelete = (language: Tables<"languages">) => async () => {
-        const result = LanguageDeleteFormShema.safeParse(language);
-
-        if (!result.success) {
-            return toast({
-                title: result.error.name,
-                description: result.error.message,
-                variant: "destructive",
-            });
-        }
-
-        const status = await deleteLanguage(result.data);
+        const status = await deleteLanguage(language.id);
         if (status.error) {
             return toast({
                 title: status.error.name,
@@ -52,37 +42,34 @@ export default function LanguageTable({ language }: Props) {
         });
     };
 
-    const columns: ColumnDef<(typeof language)[0]>[] = [
-        {
-            accessorKey: "id",
-            header: "ID",
-        },
-        {
-            id: "flag",
-            header: "Flag",
-            cell: ({ row }) => {
-                return <PathImage path={row.original.flag} alt={row.original.name} height={24} width={32} />;
-            },
-        },
-        {
-            accessorKey: "name",
-            header: "Name",
-        },
-        {
-            accessorKey: "created_at",
-            header: "Created At",
-        },
-        {
-            id: "delete_action",
-            cell: ({ row }) => {
-                return (
-                    <Button variant="destructive" onClick={handleDelete(row.original)}>
-                        <Icon icon="trash" size="16" />
-                    </Button>
-                );
-            },
-        },
-    ];
-
-    return <DataTable columns={columns} data={language} />;
+    return (
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableHead>ID</TableHead>
+                    <TableHead>Flag</TableHead>
+                    <TableHead>ISO</TableHead>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Action</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {language.map((lang) => (
+                    <TableRow>
+                        <TableCell>{lang.id}</TableCell>
+                        <TableCell>
+                            <PathImage path={lang.flag} alt={lang.name} height={24} width={32} />
+                        </TableCell>
+                        <TableCell>{lang.name}</TableCell>
+                        <TableCell className="w-full">{lang.display_name}</TableCell>
+                        <TableCell>
+                            <Button variant="destructive" onClick={handleDelete(lang)}>
+                                <Icon icon="trash" size="16" />
+                            </Button>
+                        </TableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
+        </Table>
+    );
 }

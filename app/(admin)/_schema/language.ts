@@ -6,7 +6,3 @@ export const LanguageFormSchema = z.object({
     display_name: z.string().min(2).max(255),
     flag: z.string().nullable(),
 });
-
-export const LanguageDeleteFormShema = z.object({
-    id: z.number(),
-});

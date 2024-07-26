@@ -1,23 +1,6 @@
-import { FeatherIconNames } from "@/types/feather";
+import { Map } from "@/types/map";
 
 export const base = "/webmaster";
-
-export interface Map {
-    [key: string]: {
-        url: string | null;
-        title: string;
-        menu?: {
-            icon: FeatherIconNames;
-            description: string;
-            children: {
-                [key: string]: {
-                    url: string;
-                    title: string;
-                };
-            };
-        };
-    };
-}
 
 export const sitemap: Map = {
     dashboard: {
@@ -59,7 +42,7 @@ export const sitemap: Map = {
                 },
                 createClub: {
                     url: `${base}/clubs/create`,
-                    title: "Create a club",
+                    title: "Create a club admin",
                 },
                 viewClub: {
                     url: `/clubs`,

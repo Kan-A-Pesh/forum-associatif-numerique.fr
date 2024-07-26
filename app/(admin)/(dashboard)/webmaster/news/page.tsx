@@ -13,7 +13,7 @@ export default async function NewsPage() {
 
     const { data, error } = await supabase.from("news").select("*");
 
-    const news = data && data.length > 0 ? await packLangs(data) : [];
+    const news = data && data.length > 0 ? await packLangs(data) : {};
 
     return (
         <section className="flex flex-col gap-y-4 p-4 md:p-8 lg:p-12 w-full max-w-4xl">
@@ -31,7 +31,7 @@ export default async function NewsPage() {
             {error && <p className="text-red-500">{error.message}</p>}
 
             {Object.entries(news).map(([id, articles]) => (
-                <div className="mb-2">
+                <div className="mb-2" key={id}>
                     <div className="flex items-center gap-2 mb-2">
                         <h2 className="text-md opacity-50">ID: {id}</h2>
                         <Link href={`/webmaster/news/${id}`} passHref className="ms-auto">
