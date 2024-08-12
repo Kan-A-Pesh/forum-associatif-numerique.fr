@@ -61,7 +61,7 @@ export default function useZodForm<K, T extends z.ZodObject<any>>(
     onSubmit?: (data: any) => Promise<Status<K>>,
     onValuesChange?: (values: z.infer<T>) => void,
 ): ZodForm<z.infer<T>> {
-    const [values, setValues] = useState(defaultValues);
+    const [values, setValues] = useState(JSON.parse(JSON.stringify(defaultValues)));
     const [status, setStatus] = useState<K | null | undefined>(undefined);
     const [errors, setErrors] = useState<Errors>({});
 
@@ -94,7 +94,7 @@ export default function useZodForm<K, T extends z.ZodObject<any>>(
             newValue = (value as (prev: (typeof values)[Key]) => (typeof values)[Key])(values[key]);
         }
 
-        setValues((prev) => ({
+        setValues((prev: any) => ({
             ...prev,
             [key]: newValue,
         }));

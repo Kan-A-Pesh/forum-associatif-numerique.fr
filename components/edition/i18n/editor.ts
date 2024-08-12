@@ -7,4 +7,5 @@ export default interface EditorProps<T> {
     lang: number;
     onValuesChange?: (data: T) => void;
     onSubmit?: (data: any) => Promise<Status<any>>;
+    additional?: any;
 }

@@ -77,6 +77,7 @@ alter table "public"."clubs" drop column "id";
 
 alter table "public"."clubs" drop column "uuid";
 
+alter table "public"."clubs" alter column "category" set data type text using "category"::text;
 alter table "public"."clubs" alter column "category" set data type uuid using "category"::uuid;
 
 alter table "public"."clubs" alter column "slug" set data type text using "slug"::text;
@@ -91,9 +92,10 @@ alter table "public"."languages" add column "flag" text;
 
 alter table "public"."news" drop column "uuid";
 
-alter table "public"."news" alter column "id" set default gen_random_uuid();
-
+alter table "public"."news" alter column "id" set data type text using "id"::text;
 alter table "public"."news" alter column "id" set data type uuid using "id"::uuid;
+
+alter table "public"."news" alter column "id" set default gen_random_uuid();
 
 alter table "public"."news" alter column "title" set not null;
 

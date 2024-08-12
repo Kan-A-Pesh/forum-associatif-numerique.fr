@@ -12,7 +12,7 @@ import { z } from "zod";
 import useZodForm from "@/lib/hooks/useZodForm";
 import EditorProps from "@/components/edition/i18n/editor";
 import MediaInput from "@/components/media/media-input";
-import { CategoryFormSchema } from "@/app/(admin)/_schema/category";
+import { CategoryFormSchema } from "@/app/(admin)/(dashboard)/webmaster/_schema/category";
 import IconPicker from "@/components/edition/icon-picker";
 
 export default function CategoryEditor({

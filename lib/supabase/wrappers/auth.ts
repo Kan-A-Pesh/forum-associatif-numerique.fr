@@ -1,10 +1,11 @@
 "use server";
 
-import { User } from "@supabase/supabase-js";
+import { SupabaseClient, User } from "@supabase/supabase-js";
 import { createClient } from "../agents/server";
+import { Database } from "@/types/supabase";
 
 interface AuthStatus {
-    supabase: any;
+    supabase: SupabaseClient<Database, "public", Database["public"]>;
     user: User | null;
 }
 

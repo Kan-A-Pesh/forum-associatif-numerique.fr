@@ -1,14 +1,26 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/agents/server";
-import getAuth from "@/lib/supabase/wrappers/auth";
-import { ClubFormSchema } from "../../_schema/club";
+import { ClubFormSchema } from "./_schema/club";
 import { z } from "zod";
+import LangWrapper from "@/components/edition/i18n/lang-wrapper";
+import ClubEditor from "./_components/club-editor";
+import debugClub from "./_actions/debug";
+import getSlug from "./_actions/getSlug";
 
-export default async function Admin() {
+interface Props {
+    searchParams?: {
+        club?: string;
+    };
+}
+
+export default async function Admin({ searchParams }: Props) {
     const supabase = await createClient();
-    const { user } = await getAuth();
-    const club = user?.user_metadata?.club;
+    const club = await getSlug(searchParams?.club);
+
+    if (!club) {
+        return <p className="text-red-500">Invalid club</p>;
+    }
 
     const { data, error } = await supabase.from("clubs").select("*").eq("id", club).returns<z.infer<typeof ClubFormSchema>[]>();
 
@@ -16,5 +28,5 @@ export default async function Admin() {
         return <p className="text-red-500">{error.message}</p>;
     }
 
-    return <p>{JSON.stringify(data)}</p>;
+    return <LangWrapper data={data} editor={ClubEditor} absoluteBanner onSubmit={debugClub} additional={{ club }} />;
 }

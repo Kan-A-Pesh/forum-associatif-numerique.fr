@@ -11,7 +11,6 @@ export default async function CreateClubsPage() {
     const createClubAdminAction = async (data: any) => {
         "use server";
         const result = await createClubAdmin(data);
-        console.log(result);
         if (!result.error) redirect("/webmaster/clubs");
         return result;
     };

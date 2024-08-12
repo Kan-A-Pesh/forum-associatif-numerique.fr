@@ -12,7 +12,7 @@
 [ ] Landing page stats
 [x] News
 [x] Categories
-[ ] Clubs
+[x] Clubs
 [x] Languages
 
 ### Assets management (medias)
@@ -23,7 +23,7 @@
 
 ### Clubs management
 
-[ ] View all clubs
+[x] View all clubs
 [x] Create club account
 [x] Delete club account
 [ ] Reroll club account
@@ -32,12 +32,20 @@
 ## Admin features (clubs)
 
 [ ] Edit password
-[ ] Edit club details
-[ ] Add components
+[x] Edit club details
+[x] Add components
 [ ] Move components
 [ ] Preview
 
-### Components list
+### Components list (admin)
+
+[x] Text
+[x] Gallery
+[ ] Video
+[ ] Contact
+[x] Columns
+
+### Components list (preview)
 
 [ ] Text
 [ ] Gallery
@@ -56,7 +64,6 @@
 
 [ ] Deployment (CI/CD)
 [ ] Database
-[ ] Documentations
 [ ] Accessibility
 [ ] Open-graph & Metadata
 [ ] Sitemap
@@ -64,5 +71,5 @@
 [ ] Internationalization (i18n)
 [ ] Monitoring
 [ ] Logging
-[ ] Caching
+[x] Caching
 [x] Feedback

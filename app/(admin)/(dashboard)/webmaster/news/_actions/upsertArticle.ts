@@ -2,7 +2,7 @@
 
 import { ErrorStatus, Status, SuccessStatus } from "@/types/status";
 import { createClient } from "@/lib/supabase/agents/server";
-import { NewsFormSchema } from "@/app/(admin)/_schema/news-form";
+import { NewsFormSchema } from "@/app/(admin)/(dashboard)/webmaster/_schema/news-form";
 import { fallbackLanguage } from "@/lib/supabase/wrappers/languages";
 import { Tables } from "@/types/supabase";
 import { randomUUID } from "crypto";

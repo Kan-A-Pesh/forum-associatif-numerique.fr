@@ -12,6 +12,7 @@ export interface Props<T extends { lang: number; [key: string]: any }, K> {
     editor: React.ComponentType<EditorProps<T>>;
     onSubmit: (data: T) => Promise<Status<K>>;
     absoluteBanner?: boolean;
+    additional?: any;
 }
 
 export default async function LangWrapper<T extends { lang: number; [key: string]: any }, K>({
@@ -19,6 +20,7 @@ export default async function LangWrapper<T extends { lang: number; [key: string
     editor,
     onSubmit,
     absoluteBanner,
+    additional,
 }: Props<T, K>) {
     const languages = await getLanguages();
     const defaultLanguage = await fallbackLanguage();
@@ -32,6 +34,7 @@ export default async function LangWrapper<T extends { lang: number; [key: string
             onSubmit={onSubmit}
             absoluteBanner={absoluteBanner}
             fallbackUUID={randomUUID()}
+            additional={additional}
         />
     );
 }

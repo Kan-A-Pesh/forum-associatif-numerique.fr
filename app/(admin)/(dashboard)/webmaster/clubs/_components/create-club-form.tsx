@@ -1,6 +1,6 @@
 "use client";
 
-import { ClubUserFormSchema } from "@/app/(admin)/_schema/club-user";
+import { ClubUserFormSchema } from "@/app/(admin)/(dashboard)/webmaster/_schema/club-user";
 import useZodForm from "@/lib/hooks/useZodForm";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

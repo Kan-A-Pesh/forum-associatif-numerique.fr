@@ -7,7 +7,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/agents/server";
 import LangWrapper from "@/components/edition/i18n/lang-wrapper";
 import upsertArticle from "../_actions/upsertArticle";
-import { NewsFormSchema } from "@/app/(admin)/_schema/news-form";
+import { NewsFormSchema } from "@/app/(admin)/(dashboard)/webmaster/_schema/news-form";
 import { z } from "zod";
 
 interface Props {

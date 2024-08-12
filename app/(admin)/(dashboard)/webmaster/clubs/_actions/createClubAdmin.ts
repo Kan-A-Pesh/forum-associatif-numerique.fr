@@ -1,6 +1,6 @@
 "use server";
 
-import { ClubUserFormSchema } from "@/app/(admin)/_schema/club-user";
+import { ClubUserFormSchema } from "@/app/(admin)/(dashboard)/webmaster/_schema/club-user";
 import sendInvitationMail from "@/lib/mail/mailer";
 import { createAuthSuperClient } from "@/lib/supabase/agents/super-server";
 import { ErrorStatus, SuccessStatus } from "@/types/status";

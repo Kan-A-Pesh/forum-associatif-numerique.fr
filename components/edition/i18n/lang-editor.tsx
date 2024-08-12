@@ -22,6 +22,7 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
     onSubmit,
     absoluteBanner,
     fallbackUUID,
+    additional,
 }: Props & WrapperProps<T, K>) {
     const Editor = editor;
     const router = useRouter();
@@ -54,7 +55,7 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
                 description: "The changes have been saved successfully",
             });
 
-            setPushedData([...modifiedData]);
+            setPushedData(JSON.parse(JSON.stringify(modifiedData)));
         } else {
             toast({
                 title: "Oops",
@@ -67,7 +68,7 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
     };
 
     const handleCancel = () => {
-        setModifiedData(data);
+        setModifiedData([...data]);
         setRefreshKey((prev) => prev + 1);
     };
 
@@ -103,6 +104,7 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
                 base={pushedData.find((row) => row.lang == defaultLanguage)}
                 id={fallbackUUID}
                 lang={activeLang}
+                additional={additional}
                 onValuesChange={(values) => {
                     setModifiedData((prev) => {
                         const index = prev.findIndex((row) => row.lang == activeLang);
@@ -122,7 +124,7 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
                     "flex gap-4 items-center mt-2 rounded-lg bg-black bg-opacity-50 backdrop-blur-lg border border-gray-700 p-4",
                     !absoluteBanner && !changesMade && "hidden",
 
-                    absoluteBanner && "fixed bottom-4 left-[20vw] right-[20vw] z-20 translate-y-24 transition-transform duration-300",
+                    absoluteBanner && "fixed bottom-4 left-[20vw] right-[20vw] z-20 translate-y-64 transition-transform duration-300",
                     absoluteBanner && changesMade && "translate-y-0 ",
                 )}
                 ref={bannerRef}

@@ -12,7 +12,7 @@ import getHslColor from "@/lib/ui/color";
 import { z } from "zod";
 import { timeRangeToString } from "@/lib/ui/time";
 import useZodForm from "@/lib/hooks/useZodForm";
-import { NewsFormSchema } from "@/app/(admin)/_schema/news-form";
+import { NewsFormSchema } from "@/app/(admin)/(dashboard)/webmaster/_schema/news-form";
 import EditorProps from "@/components/edition/i18n/editor";
 import MediaInput from "@/components/media/media-input";
 
@@ -146,8 +146,6 @@ export default function ArticleEditor({
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setValue("metadata", (prev) => {
-                                        console.log(prev);
-                                        console.log({ ...prev, location: "" });
                                         return { ...prev, location: "" };
                                     });
                                 }}

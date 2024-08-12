@@ -1,6 +1,6 @@
 "use client";
 
-import { LanguageFormSchema } from "@/app/(admin)/_schema/language";
+import { LanguageFormSchema } from "@/app/(admin)/(dashboard)/webmaster/_schema/language";
 import { Input } from "@/components/ui/input";
 import useZodForm from "@/lib/hooks/useZodForm";
 import createLanguage from "../_actions/createLanguage";

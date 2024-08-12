@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * Merge multiple rows into a single row selected by the root language
  * This is useful for merging rows with missing translations into a single row

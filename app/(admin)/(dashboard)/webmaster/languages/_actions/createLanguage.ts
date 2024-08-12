@@ -1,6 +1,6 @@
 "use server";
 
-import { LanguageFormSchema } from "@/app/(admin)/_schema/language";
+import { LanguageFormSchema } from "@/app/(admin)/(dashboard)/webmaster/_schema/language";
 import { createClient } from "@/lib/supabase/agents/server";
 import { ErrorStatus, SuccessStatus } from "@/types/status";
 

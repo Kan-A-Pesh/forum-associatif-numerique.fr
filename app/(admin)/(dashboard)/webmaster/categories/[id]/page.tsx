@@ -8,7 +8,7 @@ import LangWrapper from "@/components/edition/i18n/lang-wrapper";
 import { z } from "zod";
 import CategoryEditor from "../_components/category-editor";
 import upsertCategory from "../_actions/upsertCategory";
-import { CategoryFormSchema } from "@/app/(admin)/_schema/category";
+import { CategoryFormSchema } from "@/app/(admin)/(dashboard)/webmaster/_schema/category";
 
 interface Props {
     params: {
