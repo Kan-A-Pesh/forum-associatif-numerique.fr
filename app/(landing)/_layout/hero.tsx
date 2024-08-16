@@ -1,7 +1,7 @@
 "use server";
 
 import Image from "next/image";
-import HeroButton from "./components/HeroButton";
+import HeroButton from "./components/hero-button";
 import { getPublicUrl, listFiles } from "@/lib/supabase/wrappers/bucket";
 
 export default async function Hero() {

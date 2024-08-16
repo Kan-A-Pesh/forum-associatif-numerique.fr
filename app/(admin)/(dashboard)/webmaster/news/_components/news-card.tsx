@@ -10,13 +10,16 @@ import { timeRangeToString } from "@/lib/ui/time";
 import Profile from "@/components/clubs/profile";
 import PathImage from "@/components/common/path-image";
 import { translate } from "@/lib/stores/language";
+import { ClassValue } from "clsx";
+import { cn } from "@/lib/ui/cn";
 
 interface Props {
     newsList: Tables<"news">[];
     relatedClub?: Tables<"clubs">;
+    className?: ClassValue;
 }
 
-export default function NewsCard({ newsList, relatedClub }: Props) {
+export default function NewsCard({ newsList, relatedClub, className }: Props) {
     const news = translate(newsList);
 
     const newsColorHsl = getHslColor(news.color ?? -1);
@@ -24,7 +27,7 @@ export default function NewsCard({ newsList, relatedClub }: Props) {
 
     return (
         <article
-            className="p-8 rounded-lg shadow-md border"
+            className={cn("p-8 rounded-lg shadow-md border", className)}
             style={{
                 backgroundColor: `hsl(${newsColorHsl}, 25%)`,
                 borderColor: `hsl(${newsColorHsl})`,
@@ -36,7 +39,9 @@ export default function NewsCard({ newsList, relatedClub }: Props) {
             </header>
             <div className="flex gap-6 flex-col md:flex-row">
                 {news.thumbnail_path && (
-                    <PathImage path={news.thumbnail_path} alt={news.title ?? ""} width={350} height={250} className="rounded-lg" />
+                    <div className="flex-grow-0 flex-shrink-0 max-w-[75vw] overflow-hidden">
+                        <PathImage path={news.thumbnail_path} alt={news.title ?? ""} width={350} height={250} className="rounded-lg" />
+                    </div>
                 )}
                 <div className="flex flex-col gap-4">
                     {relatedClub && (

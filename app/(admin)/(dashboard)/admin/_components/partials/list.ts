@@ -4,6 +4,7 @@ import PartialsText, { TextDefault, TextSchema } from "./text";
 import { z } from "zod";
 import { FeatherIconNames } from "@/types/feather";
 import PartialsGallery, { GalleryDefault, GallerySchema } from "./gallery";
+import PartialsEmbed, { EmbedDefault, EmbedSchema } from "./embed";
 
 interface Partial {
     icon: FeatherIconNames;
@@ -27,6 +28,13 @@ const partialList: { [key: string]: Partial } = {
         schema: GallerySchema,
         default: GalleryDefault,
         editable: PartialsGallery,
+    },
+    embed: {
+        icon: "bookmark",
+        name: "Embed",
+        schema: EmbedSchema,
+        default: EmbedDefault,
+        editable: PartialsEmbed,
     },
 };
 

@@ -6,7 +6,7 @@ import { z } from "zod";
 import { ClubFormSchema } from "../_schema/club";
 import list from "./partials/list";
 import { Button } from "@/components/ui/button";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 
 type Component = { type: string; value: any };
 export type BasePartialProps = React.ComponentProps<typeof ClubEditor> & { form: ZodForm<z.infer<typeof ClubFormSchema>> };
