@@ -5,6 +5,10 @@ import { z } from "zod";
 import { FeatherIconNames } from "@/types/feather";
 import PartialsGallery, { GalleryDefault, GallerySchema } from "./gallery";
 import PartialsEmbed, { EmbedDefault, EmbedSchema } from "./embed";
+import ViewText from "@/app/clubs/[slug]/views/text";
+import ViewGallery from "@/app/clubs/[slug]/views/gallery";
+import ViewEmbed from "@/app/clubs/[slug]/views/embed";
+import { ViewProps } from "@/app/clubs/[slug]/view";
 
 interface Partial {
     icon: FeatherIconNames;
@@ -12,6 +16,7 @@ interface Partial {
     schema: z.ZodObject<any, any>;
     default: any;
     editable: React.ComponentType<PartialProps>;
+    component: React.ComponentType<ViewProps>;
 }
 
 const partialList: { [key: string]: Partial } = {
@@ -21,6 +26,7 @@ const partialList: { [key: string]: Partial } = {
         schema: TextSchema,
         default: TextDefault,
         editable: PartialsText,
+        component: ViewText,
     },
     gallery: {
         icon: "image",
@@ -28,6 +34,7 @@ const partialList: { [key: string]: Partial } = {
         schema: GallerySchema,
         default: GalleryDefault,
         editable: PartialsGallery,
+        component: ViewGallery,
     },
     embed: {
         icon: "bookmark",
@@ -35,9 +42,11 @@ const partialList: { [key: string]: Partial } = {
         schema: EmbedSchema,
         default: EmbedDefault,
         editable: PartialsEmbed,
+        component: ViewEmbed,
     },
 };
 
 export const getPartialDefault = (type: string) => partialList[type].default;
+export const getPartialView = (type: string) => partialList[type].component;
 
 export default partialList;
