@@ -10,17 +10,18 @@ import { createAuthSuperClient } from "@/lib/supabase/agents/super-server";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/common/icon";
+import { Tables } from "@/types/supabase";
 
 export default async function ClubsPage() {
     const supabase = await createClient();
     const superAuthClient = await createAuthSuperClient();
 
     const { data: clubsData, error: clubsError } = await supabase.from("clubs").select("*");
-    const clubs: Record<string, any> = clubsData && clubsData.length > 0 ? await packLangs(clubsData) : {};
+    const clubs: Record<string, Tables<"clubs">[] | null> = clubsData && clubsData.length > 0 ? await packLangs(clubsData) : {};
 
     const { data: usersData, error: usersError } = await superAuthClient.listUsers({ perPage: 1000 });
 
-    const clubUsers: Record<string, User[]> = {};
+    const clubUsers: Record<string, { club: Tables<"clubs">[] | null; users: User[] }> = {};
     const zombieUsers: User[] = [];
 
     usersData.users.forEach((user) => {
@@ -28,8 +29,7 @@ export default async function ClubsPage() {
 
         if (user.user_metadata?.club) {
             const club = user.user_metadata.club as string;
-            clubUsers[club] ? clubUsers[club].push(user) : (clubUsers[club] = [user]);
-            clubs[club] = null;
+            clubUsers[club] ? clubUsers[club].users.push(user) : (clubUsers[club] = { club: clubs[club], users: [user] });
         } else {
             zombieUsers.push(user);
         }
@@ -75,8 +75,8 @@ export default async function ClubsPage() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {Object.entries(clubs).map(([id, club]) => (
-                        <ClubRow key={id} clubId={id} clubList={club} users={clubUsers[id] || []} />
+                    {Object.entries(clubUsers).map(([id, club]) => (
+                        <ClubRow key={id} clubId={id} clubList={club.club} users={club.users} />
                     ))}
                 </TableBody>
             </Table>

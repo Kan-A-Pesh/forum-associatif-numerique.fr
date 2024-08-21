@@ -84,7 +84,7 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
 
     return (
         <section>
-            <div className="flex gap-4 items-center mb-4">
+            <div className="flex gap-4 items-center mb-4" id="lang-selector">
                 <h2 className="text-xl">Language</h2>
                 {languages.map((lang) => {
                     return (
@@ -128,6 +128,7 @@ export default function LangEditor<T extends { lang: number; [key: string]: any 
                     absoluteBanner && changesMade && "translate-y-0 ",
                 )}
                 ref={bannerRef}
+                id="save-cancel"
             >
                 {absoluteBanner && <span className="me-auto">Some changes have been made</span>}
                 <Button onClick={handleSave} variant="default">

@@ -23,6 +23,7 @@ export default function PartialsAdd({ onSelect, alwaysVisible, vertical }: Props
                 !alwaysVisible && "opacity-25 hover:opacity-100 transition-opacity",
                 !vertical && "py-8",
             )}
+            id={alwaysVisible ? "always-visible-add-part" : undefined}
         >
             <hr className={cn("border-0 absolute -z-20 bg-gray-700", vertical ? "w-[1px] h-full" : "h-[1px] w-full")} />
             <Popover open={isOpen} onOpenChange={setIsOpen}>

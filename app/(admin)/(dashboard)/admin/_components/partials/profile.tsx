@@ -22,7 +22,7 @@ export default function PartialsProfile(props: BasePartialProps) {
                 </div>
 
                 <div>
-                    <div className="flex flex-col gap-2 mb-4">
+                    <div className="flex flex-col gap-2 mb-4" id="club-name">
                         <Label>Club Name</Label>
                         <Input placeholder={props.base?.title ?? undefined} size={32} {...props.form.register.text("title")} />
                         {props.form.errors["title"] && <p className="text-red-500">{props.form.errors["title"]}</p>}

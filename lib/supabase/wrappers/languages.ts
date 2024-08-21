@@ -54,6 +54,7 @@ export async function fallbackLanguage(languageAttempt?: number): Promise<number
  */
 export async function packLangs<T extends { lang: number; id: string; [key: string]: any }>(rows: T[]): Promise<Record<string, T[]>> {
     return rows.reduce((acc: Record<string, T[]>, row) => {
+        console.log(row.id);
         if (!acc[row.id]) acc[row.id] = [row];
         else acc[row.id].push(row);
         return acc;

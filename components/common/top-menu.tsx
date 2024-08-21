@@ -36,7 +36,7 @@ export default function TopMenu({ username, sitemap }: Props) {
 
                         if (value.url) {
                             link = (
-                                <NavigationMenuLink className={cn(triggerClass, additionnalTriggerClass)} href={value.url}>
+                                <NavigationMenuLink className={cn(triggerClass, additionnalTriggerClass)} href={value.url} id={value.id}>
                                     {value.title}
                                 </NavigationMenuLink>
                             );
@@ -60,6 +60,7 @@ export default function TopMenu({ username, sitemap }: Props) {
                                                     <NavigationMenuLink
                                                         key={childKey}
                                                         href={childValue.url}
+                                                        id={childValue.id}
                                                         className="w-full p-2 rounded-lg bg-opacity-0 hover:bg-opacity-10 bg-black text-nowrap"
                                                     >
                                                         {childValue.title}
