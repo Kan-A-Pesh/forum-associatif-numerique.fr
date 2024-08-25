@@ -1,3 +1,90 @@
 {
-    "hero_subtitle": "Student associations of the Pôle Léonard de Vinci"
+    "landing": {
+        "hero": "Student clubs of the Pôle Léonard de Vinci",
+        "discover": "Discover"
+    },
+    "admin": {
+        "driver": {
+            "step1": {
+                "title": "Hey! Welcome!",
+                "description": "Welcome to the new version of the forum-associatif-numerique.fr website,\ni'll guide you through the process of creating a page for your club!",
+                "nextBtnText": "Let's get started!"
+            },
+            "step2": {
+                "title": "What's new?",
+                "description": "We've made some changes to the way you create a page and added multi-language support.\nLet's see how it works!",
+                "nextBtnText": "Next"
+            },
+            "step3": {
+                "title": "Language selector",
+                "description": "Here you can select the language you want to create the page in.\nFor now we'll start with the default language, and translate the page later.",
+                "nextBtnText": "Next"
+            },
+            "step4": {
+                "title": "Edit the club name",
+                "description": "Let's start by editing the club name.",
+                "nextBtnText": "I've edited the name"
+            },
+            "step5": {
+                "title": "DON'T FORGET!",
+                "description": "Nice! Now don't forget to save your changes!",
+                "nextBtnText": "I've saved my changes 🗿"
+            },
+            "step6": {
+                "title": "Let's continue!",
+                "description": "Now we'll do some more advanced stuff: the page content.",
+                "nextBtnText": "I'm ready!"
+            },
+            "step7": {
+                "title": "Add a new section",
+                "description": "Here you can add a new section to the page, like a text block, an image gallery, or an embed.\nClick on the \"+\" button and select a text block to add it to the page.",
+                "nextBtnText": "Next"
+            },
+            "step8": {
+                "title": "Edit the text block",
+                "description": "Great! Now you can edit the text block you just added.",
+                "nextBtnText": "Done!"
+            },
+            "step9": {
+                "title": "Perfect!",
+                "description": "You've added a new section to the page!\nDon't forget to save your changes!",
+                "nextBtnText": "I've saved my changes (again) 🗿"
+            },
+            "step10": {
+                "title": "Back to the language selector",
+                "description": "After you've added your content and SAVED it, you can now create a translation for another language.\nLet's select a different language and translate the page.",
+                "nextBtnText": "Next"
+            },
+            "step11": {
+                "title": "Translate the club name",
+                "description": "As you can see, the fallback language is already filled in.\nYou can leave it as is if it's the same, or translate it to another language.",
+                "nextBtnText": "Next"
+            },
+            "step12": {
+                "title": "Recreate the page",
+                "description": "Now you can recreate the page in another language.\nAaaannd... \nDon't forget to save your changes!",
+                "nextBtnText": "Yes."
+            },
+            "step13": {
+                "title": "That's it!",
+                "description": "You've successfully created a page for your club!\nIf you have any questions, feel free to ask the webmaster.",
+                "nextBtnText": "Got it!"
+            },
+            "step14": {
+                "title": "One more thing!",
+                "description": "Oh, and you can always give feedback on the new website by clicking here.",
+                "nextBtnText": "I'll do that!"
+            },
+            "step15": {
+                "title": "Enjoy!",
+                "description": "Enjoy the new website!",
+                "nextBtnText": "Close"
+            },
+            "step16": {
+                "title": "Wait a minute!",
+                "description": "Did you forget to save your changes??",
+                "doneBtnText": "No. I never forget. 🗿"
+            }
+        }
+    }
 }
