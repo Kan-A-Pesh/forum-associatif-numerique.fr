@@ -178,5 +178,5 @@ export default function Driver() {
         window.driverObjStarted = true;
     }, []);
 
-    return <div className="fixed top-[50%] left-[50%] -z-50 pointer-events-none" id="null-element" />;
+    return null;
 }
