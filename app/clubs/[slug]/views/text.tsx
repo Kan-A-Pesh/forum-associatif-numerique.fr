@@ -11,8 +11,6 @@ export default function ViewText({ value }: ViewProps) {
     const TextComponent = schema.data.size;
     const size = TextSizes[schema.data.size];
 
-    console.log(schema.data.content);
-
     return (
         <TextComponent className={cn(size, "whitespace-pre-line")} style={{ color: schema.data.color }}>
             {schema.data.content}
