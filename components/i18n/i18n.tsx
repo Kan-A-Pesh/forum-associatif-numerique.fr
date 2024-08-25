@@ -40,6 +40,4 @@ export function useInitializeI18n() {
 
         initializeI18n();
     }, [selectedLanguage]);
-
-    return initialized;
 }
