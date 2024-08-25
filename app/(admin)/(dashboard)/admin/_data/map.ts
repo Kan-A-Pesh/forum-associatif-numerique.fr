@@ -14,5 +14,6 @@ export const sitemap: Map = {
     feedbacks: {
         url: `mailto:${process.env.NEXT_PUBLIC_SUPPORT_MAIL}`,
         title: "Make a feedback!",
+        id: "menu-feedback",
     },
 };

@@ -26,6 +26,13 @@ export default function Flag() {
             const langs = await getLanguages();
             setLanguages(langs);
 
+            languageStore.setLanguageMap(
+                langs.reduce((acc, curr) => {
+                    acc[curr.id] = curr.name;
+                    return acc;
+                }, {} as Record<number, string>),
+            );
+
             if (languageStore.selectedLanguage != -1) {
                 setCurrentLanguageCode(languageStore.selectedLanguage);
                 return;
@@ -42,7 +49,10 @@ export default function Flag() {
                 }
             }
 
-            setCurrentLanguageCode(preferedLanguage ? preferedLanguage.id : await fallbackLanguage());
+            const selectedLanguage = preferedLanguage ? preferedLanguage.id : await fallbackLanguage();
+
+            languageStore.setSelectedLanguage(selectedLanguage);
+            setCurrentLanguageCode(selectedLanguage);
         })();
     }, []);
 

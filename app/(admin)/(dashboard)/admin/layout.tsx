@@ -16,6 +16,7 @@ export default async function WebmasterLayout({ children }: { children: React.Re
     return (
         <>
             <TopMenu username={club} sitemap={sitemap} />
+            <div className="fixed top-[50%] left-[50%] -z-50 pointer-events-none" id="null-element" />
             <main className="pt-12 flex flex-col items-center">{children}</main>
         </>
     );

@@ -54,12 +54,7 @@ export default function ClubRow({ clubId, clubList, users }: Props) {
                 <AdminsCell users={users} />
             </TableCell>
             <TableCell className="text-nowrap">
-                <Link href={`/admin/dashboard/admin?club=${clubId}`}>
-                    <Button size="icon">
-                        <Icon icon="edit" />
-                    </Button>
-                </Link>
-                <Button size="icon" className="ml-2" onClick={handleDelete} variant="destructive" disabled={!club}>
+                <Button size="icon" onClick={handleDelete} variant="destructive" disabled={!club}>
                     <Icon icon="trash" />
                 </Button>
             </TableCell>

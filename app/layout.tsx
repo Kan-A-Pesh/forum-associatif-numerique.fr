@@ -8,8 +8,8 @@ const defaultUrl = process.env.NEXT_PUBLIC_URL ? `https://${process.env.NEXT_PUB
 
 export const metadata = {
     metadataBase: new URL(defaultUrl),
-    title: "Next.js and Supabase Starter Kit",
-    description: "The fastest way to build apps with Next.js and Supabase",
+    title: "Forum Associatif Numérique",
+    description: "Découvrez une soixantaine d'association étudiantes du Pôle Léonard de Vinci!",
 };
 
 const fontSans = Hanken_Grotesk({

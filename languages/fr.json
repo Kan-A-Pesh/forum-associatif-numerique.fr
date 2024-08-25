@@ -1,3 +1,121 @@
 {
-    "hero_subtitle": "Les associations étudiantes du Pôle Léonard de Vinci"
+    "landing": {
+        "hero": "Clubs étudiants du Pôle Léonard de Vinci",
+        "discover": "Découvrir",
+        "news": "Quoi de neuf ?",
+        "newsSubtitle": "Dernières infos de la part des associations",
+        "clubsTitle": "Associations",
+        "clubsSubtitle": "Découvrez les associations",
+        "clubsDescription": "Les associations, c’est le meilleur moyen pour faire des rencontres et nouer de belles amitiés! Actuellement, le Pôle compte 61 associations aux domaines variés: sport, gaming, événementiel, business, théâtre, cuisine… Une association te correspond forcément! Alors n’hésite plus et va prendre du bon temps avec des gens partageant les mêmes centres d’intérêt que toi.",
+        "clubsSearch": "Rechercher une association",
+        "searchPlaceholder": "Rechercher",
+        "categories": "Catégories",
+        "categoriesSubtitle": "Des associations aux thématiques variées",
+        "categoryCardsTitle": "Toutes les assos",
+        "pulv": {
+            "title": "Le Pôle Léonard de Vinci",
+            "subTitle": "Un campus vibrant avec une multitude d'opportunités associatives.",
+            "step1": {
+                "title": "8 600",
+                "subTitle": "étudiants",
+                "description": "Le pôle Léonard de Vinci est composé de 3 écoles (ESILV, EMLV et IIM) et regroupe plus de 7 500 étudiants ! Cependant, comment rencontrer toutes ces personnes ? C’est là qu’intervient le merveilleux principe de la transversalité : semaines transverses, sport obligatoire, et on y vient, le meilleur… les associations !"
+            },
+            "step2": {
+                "title": "58 000",
+                "subTitle": "m² de locaux",
+                "description": "Au Pôle, nous avons la chance d’avoir un campus à l’américaine avec près de 58 000m2 de locaux ! De nombreuses salles et équipements sont à ta disposition si tu veux t’amuser ou créer le prochain Go-Go Gadget… De plus, avec l'arrivée en janvier 2022 des nouveaux locaux de l'IIM et l'arrivée prochaine des nouveaux locaux de l'ESILV et l'EMLV, le champ des possibles s'élargit constamment !"
+            },
+            "step3": {
+                "title": "350",
+                "subTitle": "évènements",
+                "description": "Les associations rythment la vie du pôle et des étudiants grâce à leurs évènements ! Qu’ils soient directement à destination des étudiants du pôle ou alors ouverts à l’extérieur, les évènements sont des moments à ne pas louper."
+            }
+        },
+        "footerStart": "Fait par",
+        "footerEnd": "avec ❤️ - Code disponible sur"
+    },
+    "admin": {
+        "driver": {
+            "step1": {
+                "title": "Hey! Bienvenue!",
+                "description": "Bienvenue sur la nouvelle version du site forum-associatif-numerique.fr,\nje vais vous guider dans le processus de création d'une page pour votre club!",
+                "nextBtnText": "Commençons!"
+            },
+            "step2": {
+                "title": "Quoi de neuf ?",
+                "description": "Nous avons apporté des modifications à la manière dont vous créez une page et ajouté la prise en charge de plusieurs langues.\nVoyons comment cela fonctionne!",
+                "nextBtnText": "Suivant"
+            },
+            "step3": {
+                "title": "Sélecteur de langue",
+                "description": "Ici, vous pouvez sélectionner la langue dans laquelle vous souhaitez créer la page.\nPour l'instant, nous allons commencer avec la langue par défaut, puis traduire la page plus tard.",
+                "nextBtnText": "Suivant"
+            },
+            "step4": {
+                "title": "Modifier le nom du club",
+                "description": "Commençons par modifier le nom du club.",
+                "nextBtnText": "J'ai modifié le nom"
+            },
+            "step5": {
+                "title": "N'OUBLIEZ PAS!",
+                "description": "Bien! Maintenant, n'oubliez pas de sauvegarder vos modifications!",
+                "nextBtnText": "J'ai sauvegardé mes modifications 🗿"
+            },
+            "step6": {
+                "title": "Continuons!",
+                "description": "Nous allons maintenant faire des choses plus avancées : le contenu de la page.",
+                "nextBtnText": "Je suis prêt!"
+            },
+            "step7": {
+                "title": "Ajouter une nouvelle section",
+                "description": "Ici, vous pouvez ajouter une nouvelle section à la page, comme un bloc de texte, une galerie d'images ou un embed.\nCliquez sur le bouton \"+\" et sélectionnez un bloc de texte pour l'ajouter à la page.",
+                "nextBtnText": "Suivant"
+            },
+            "step8": {
+                "title": "Modifier le bloc de texte",
+                "description": "Super! Vous pouvez maintenant modifier le bloc de texte que vous venez d'ajouter.",
+                "nextBtnText": "Terminé!"
+            },
+            "step9": {
+                "title": "Parfait!",
+                "description": "Vous avez ajouté une nouvelle section à la page!\nN'oubliez pas de sauvegarder vos modifications!",
+                "nextBtnText": "J'ai sauvegardé mes modifications (encore) 🗿"
+            },
+            "step10": {
+                "title": "Retour au sélecteur de langue",
+                "description": "Après avoir ajouté votre contenu et l'avoir SAUVEGARDÉ, vous pouvez maintenant créer une traduction pour une autre langue.\nSélectionnons une langue différente et traduisons la page.",
+                "nextBtnText": "Suivant"
+            },
+            "step11": {
+                "title": "Traduire le nom du club",
+                "description": "Comme vous pouvez le voir, la langue de secours est déjà remplie.\nVous pouvez la laisser telle quelle si c'est la même, ou la traduire dans une autre langue.",
+                "nextBtnText": "Suivant"
+            },
+            "step12": {
+                "title": "Recréer la page",
+                "description": "Maintenant, vous pouvez recréer la page dans une autre langue.\nEt n'oubliez pas de sauvegarder vos modifications!",
+                "nextBtnText": "Oui."
+            },
+            "step13": {
+                "title": "C'est tout!",
+                "description": "Vous avez créé avec succès une page pour votre club!\nSi vous avez des questions, n'hésitez pas à demander au webmaster.",
+                "nextBtnText": "J'ai compris!"
+            },
+            "step14": {
+                "title": "Encore une chose!",
+                "description": "Oh, et vous pouvez toujours donner votre avis sur le nouveau site en cliquant ici.",
+                "nextBtnText": "Je vais le faire!"
+            },
+            "step15": {
+                "title": "Profitez!",
+                "description": "Profitez du nouveau site!",
+                "nextBtnText": "Fermer"
+            },
+            "step16": {
+                "title": "Attendez une minute!",
+                "description": "Avez-vous oublié de sauvegarder vos modifications??",
+                "doneBtnText": "Non. Je n'oublie jamais. 🗿"
+            }
+        }
+    }
 }

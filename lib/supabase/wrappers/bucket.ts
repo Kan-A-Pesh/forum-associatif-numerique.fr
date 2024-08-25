@@ -16,7 +16,7 @@ export async function getStorage(name: string) {
 export async function getPublicUrl(filePath: string, storageName: string = "images", assetStorage?: any): Promise<string> {
     const { cache, storage } = assetStorage ?? (await getStorage(storageName));
     const { data } = await cache.select("value").limit(1).eq("key", md5hash(filePath)).maybeSingle();
-    return storage.getPublicUrl(filePath).data.publicUrl + (data ? "?v=" + data.value : "");
+    return process.env.NEXT_PUBLIC_STORAGE_URL + "/" + storageName + "/" + filePath + (data ? "?v=" + data.value : "");
 }
 
 export async function listFiles(folderPath: string, storageName: string = "images"): Promise<FileData[]> {
@@ -33,7 +33,7 @@ export async function listFiles(folderPath: string, storageName: string = "image
             const filePath = folderPath + "/" + file.name;
             return {
                 path: filePath,
-                url: await getPublicUrl(filePath, "", assetStorage),
+                url: await getPublicUrl(filePath, storageName, assetStorage),
             };
         }),
     );

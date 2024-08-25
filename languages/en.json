@@ -1,3 +1,121 @@
 {
-    "hero_subtitle": "Student associations of the Pôle Léonard de Vinci"
+    "landing": {
+        "hero": "Student clubs of the Pôle Léonard de Vinci",
+        "discover": "Discover",
+        "news": "News",
+        "newsSubtitle": "Latest news from the clubs",
+        "clubsTitle": "Clubs",
+        "clubsSubtitle": "Discover clubs",
+        "clubsDescription": "Clubs are the best way to meet new people and make new friends! Currently, the Pôle has 61 clubs in various fields: sports, gaming, events, business, theater, cooking... There's a club for everyone! So don't hesitate and go have a good time with people who share the same interests as you.",
+        "clubsSearch": "Search for a club",
+        "searchPlaceholder": "Search",
+        "categories": "Categories",
+        "categoriesSubtitle": "Clubs with various themes",
+        "categoryCardsTitle": "All clubs",
+        "pulv": {
+            "title": "The Pôle Léonard de Vinci",
+            "subTitle": "A vibrant campus with a multitude of club opportunities.",
+            "step1": {
+                "title": "8 600",
+                "subTitle": "students",
+                "description": "The Pôle Léonard de Vinci is composed of 3 schools (ESILV, EMLV and IIM) and has more than 7,500 students! However, how do you meet all these people? This is where the wonderful principle of transversality comes in: transversal weeks, mandatory sports, and the best part... clubs!"
+            },
+            "step2": {
+                "title": "58 000",
+                "subTitle": "m² of premises",
+                "description": "At the Pôle, we are lucky to have an American-style campus with nearly 58,000m2 of premises! Many rooms and equipment are at your disposal if you want to have fun or create the next Go-Go Gadget... In addition, with the arrival in January 2022 of the new IIM premises and the upcoming arrival of the new ESILV and EMLV premises, the possibilities are constantly expanding!"
+            },
+            "step3": {
+                "title": "350",
+                "subTitle": "events",
+                "description": "Clubs liven up the life of the Pôle and students with their events! Whether they are directly aimed at Pôle students or open to the outside, events are moments not to be missed."
+            }
+        },
+        "footerStart": "Made by",
+        "footerEnd": "with ❤️ - Code available on"
+    },
+    "admin": {
+        "driver": {
+            "step1": {
+                "title": "Hey! Welcome!",
+                "description": "Welcome to the new version of the forum-associatif-numerique.fr website,\ni'll guide you through the process of creating a page for your club!",
+                "nextBtnText": "Let's get started!"
+            },
+            "step2": {
+                "title": "What's new?",
+                "description": "We've made some changes to the way you create a page and added multi-language support.\nLet's see how it works!",
+                "nextBtnText": "Next"
+            },
+            "step3": {
+                "title": "Language selector",
+                "description": "Here you can select the language you want to create the page in.\nFor now we'll start with the default language, and translate the page later.",
+                "nextBtnText": "Next"
+            },
+            "step4": {
+                "title": "Edit the club name",
+                "description": "Let's start by editing the club name.",
+                "nextBtnText": "I've edited the name"
+            },
+            "step5": {
+                "title": "DON'T FORGET!",
+                "description": "Nice! Now don't forget to save your changes!",
+                "nextBtnText": "I've saved my changes 🗿"
+            },
+            "step6": {
+                "title": "Let's continue!",
+                "description": "Now we'll do some more advanced stuff: the page content.",
+                "nextBtnText": "I'm ready!"
+            },
+            "step7": {
+                "title": "Add a new section",
+                "description": "Here you can add a new section to the page, like a text block, an image gallery, or an embed.\nClick on the \"+\" button and select a text block to add it to the page.",
+                "nextBtnText": "Next"
+            },
+            "step8": {
+                "title": "Edit the text block",
+                "description": "Great! Now you can edit the text block you just added.",
+                "nextBtnText": "Done!"
+            },
+            "step9": {
+                "title": "Perfect!",
+                "description": "You've added a new section to the page!\nDon't forget to save your changes!",
+                "nextBtnText": "I've saved my changes (again) 🗿"
+            },
+            "step10": {
+                "title": "Back to the language selector",
+                "description": "After you've added your content and SAVED it, you can now create a translation for another language.\nLet's select a different language and translate the page.",
+                "nextBtnText": "Next"
+            },
+            "step11": {
+                "title": "Translate the club name",
+                "description": "As you can see, the fallback language is already filled in.\nYou can leave it as is if it's the same, or translate it to another language.",
+                "nextBtnText": "Next"
+            },
+            "step12": {
+                "title": "Recreate the page",
+                "description": "Now you can recreate the page in another language.\nAaaannd... \nDon't forget to save your changes!",
+                "nextBtnText": "Yes."
+            },
+            "step13": {
+                "title": "That's it!",
+                "description": "You've successfully created a page for your club!\nIf you have any questions, feel free to ask the webmaster.",
+                "nextBtnText": "Got it!"
+            },
+            "step14": {
+                "title": "One more thing!",
+                "description": "Oh, and you can always give feedback on the new website by clicking here.",
+                "nextBtnText": "I'll do that!"
+            },
+            "step15": {
+                "title": "Enjoy!",
+                "description": "Enjoy the new website!",
+                "nextBtnText": "Close"
+            },
+            "step16": {
+                "title": "Wait a minute!",
+                "description": "Did you forget to save your changes??",
+                "doneBtnText": "No. I never forget. 🗿"
+            }
+        }
+    }
 }

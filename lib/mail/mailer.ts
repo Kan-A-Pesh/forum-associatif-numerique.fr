@@ -25,6 +25,9 @@ export default async function sendInvitationMail(to: string, tempPassword: strin
 
     const link = `${process.env.NEXT_PUBLIC_URL}/signup?email=${to}&token=${tempPassword}`;
 
+    console.log("Sending invitation mail to", to);
+    console.log("Link:", link);
+
     mailTemplate = mailTemplate.replaceAll("{{SUPPORT_MAIL}}", process.env.NEXT_PUBLIC_SUPPORT_MAIL ?? "[!!SUPPORT_MAIL]");
     mailTemplate = mailTemplate.replaceAll("{{LINK}}", link);
     mailTemplate = mailTemplate.replaceAll("{{HEADER_IMAGE}}", (await getPublicUrl("hero.jpg", "assets")) ?? "[!!HEADER_IMAGE]");
