@@ -1,6 +1,9 @@
 {
+    "utils": {
+        "seeClub": "Voir la page de l'asso"
+    },
     "landing": {
-        "hero": "Clubs étudiants du Pôle Léonard de Vinci",
+        "hero": "Les associations étudiantes du Pôle Léonard de Vinci",
         "discover": "Découvrir",
         "news": "Quoi de neuf ?",
         "newsSubtitle": "Dernières infos de la part des associations",
@@ -33,6 +36,11 @@
         },
         "footerStart": "Fait par",
         "footerEnd": "avec ❤️ - Code disponible sur"
+    },
+    "clubs": {
+        "title": "Associations",
+        "subtitle": "Découvrez les associations du Pôle Léonard de Vinci",
+        "all": "Toutes les associations"
     },
     "admin": {
         "driver": {

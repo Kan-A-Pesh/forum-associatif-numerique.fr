@@ -14,8 +14,8 @@ export default async function Clubs() {
     const categories = await supabase.from("categories").select("*");
     const categoriesList = categories.data ? await packLangs(categories.data) : {};
 
-    // TODO : REPARE PLACEHOLDER
-    const searchPlaceholder = <T>landing.searchPlaceholder</T>;
+    const { data, error } = await supabase.from("clubs").select("*").order("random()").limit(1).single();
+    const randomClubTitle = error ? "La 404 Devinci" : data.title;
 
     return (
         <section className="flex flex-col gap-16 py-24 px-4 container items-center">
@@ -28,7 +28,7 @@ export default async function Clubs() {
 
                 <form action="/clubs" method="get">
                     <div className="flex gap-0.5">
-                        <Input placeholder={searchPlaceholder} name="q" />
+                        <Input placeholder={randomClubTitle || "La 404 Devinci"} name="q" />
                         <Button size="icon" type="submit">
                             <Icon icon="search" />
                         </Button>
@@ -36,8 +36,12 @@ export default async function Clubs() {
                 </form>
             </div>
             <div className="max-w-xl w-full">
-                <h4 className="text-2xl font-semibold"><T>landing.categories</T></h4>
-                <p className="text-gray-500 mb-8"> <T>landing.categoriesSubtitle</T> </p>
+                <h4 className="text-2xl font-semibold">
+                    <T>landing.categories</T>
+                </h4>
+                <p className="text-gray-500 mb-8">
+                    <T>landing.categoriesSubtitle</T>
+                </p>
 
                 {Object.entries(categoriesList).map(([id, category]) => (
                     <CategoryCard key={id} translatedCategory={category} />

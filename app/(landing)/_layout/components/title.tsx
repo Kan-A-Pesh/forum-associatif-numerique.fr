@@ -1,8 +1,8 @@
 "use server";
 
 interface Props {
-    title: string;
-    subtitle: string;
+    title: any;
+    subtitle: any;
 }
 
 export default async function Title({ title, subtitle }: Props) {

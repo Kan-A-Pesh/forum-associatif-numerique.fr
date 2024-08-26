@@ -10,21 +10,25 @@ import Link from "next/link";
 import getSocialIconFromUrl from "@/lib/ui/getSocialIconFromUrl";
 import Icon from "../common/icon";
 import getSocialHandleFromUrl from "@/lib/ui/getSocialHandleFromUrl";
+import T from "../i18n/t";
 
 interface Props {
     translatedClub: Tables<"clubs">[];
     className?: ClassValue;
+    hideTitle?: boolean;
 }
 
-export default function Cotd({ translatedClub, className }: Props) {
+export default function Cotd({ translatedClub, className, hideTitle }: Props) {
     const club = translate(translatedClub);
 
     return (
         <article className={cn("p-8 rounded-lg shadow-md border border-gray-300 bg-gray-700", className)}>
-            <header className="flex gap-4 w-full mb-4">
-                <h3 className="text-2xl font-bold">L'asso du jour</h3>
-                <span className="border border-white rounded-sm px-2 py-1 text-white text-base">{new Date().toLocaleDateString()}</span>
-            </header>
+            {!hideTitle && (
+                <header className="flex gap-4 w-full mb-4">
+                    <h3 className="text-2xl font-bold">L'asso du jour</h3>
+                    <span className="border border-white rounded-sm px-2 py-1 text-white text-base">{new Date().toLocaleDateString()}</span>
+                </header>
+            )}
             <div className="flex gap-6 flex-col md:flex-row">
                 <div className="flex flex-col items-center justify-center bg-gray-600 p-8 rounded-xl">
                     <div className="mb-4">
@@ -37,7 +41,9 @@ export default function Cotd({ translatedClub, className }: Props) {
 
                 <div className="flex flex-col gap-2">
                     <Link passHref href={`/clubs/${club.id}`}>
-                        <Button className="w-full justify-start">Voir la page de l'asso</Button>
+                        <Button className="w-full justify-start">
+                            <T>utils.seeClub</T>
+                        </Button>
                     </Link>
                     <hr className="border-gray-400 w-full my-2" />
                     {club.socials?.map((social) => (

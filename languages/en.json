@@ -1,4 +1,7 @@
 {
+    "utils": {
+        "seeClub": "See the club page"
+    },
     "landing": {
         "hero": "Student clubs of the Pôle Léonard de Vinci",
         "discover": "Discover",
@@ -33,6 +36,11 @@
         },
         "footerStart": "Made by",
         "footerEnd": "with ❤️ - Code available on"
+    },
+    "clubs": {
+        "title": "Clubs",
+        "subtitle": "Discover the clubs of the Pôle Léonard de Vinci",
+        "all": "All clubs"
     },
     "admin": {
         "driver": {
