@@ -13,10 +13,13 @@ export default async function sendInvitationMail(to: string, tempPassword: strin
     const transporter = createTransport({
         host: process.env.SMTP_HOST,
         port: parseInt(process.env.SMTP_PORT ?? "587"),
-        secure: true,
+        secure: false,
         auth: {
             user: process.env.SMTP_USER,
             pass: process.env.SMTP_PASS,
+        },
+        tls: {
+            ciphers: "SSLv3",
         },
     });
 
