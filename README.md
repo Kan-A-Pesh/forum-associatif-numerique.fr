@@ -50,4 +50,5 @@ Ce projet est sous licence GNU GPL v3.0 - voir le fichier [LICENSE](LICENSE) pou
 ## Participants 👥
 
 - [**Kan-A-Pesh**](https://github.com/Kan-A-Pesh) - Développement
+- [**Quentin Garnier**](https://github.com/F1n3x) - Traductions
 - [**Pôle Universitaire Léonard de Vinci**](https://www.devinci.fr/) - Commanditaire
