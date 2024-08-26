@@ -1,7 +1,38 @@
 {
     "landing": {
         "hero": "Student clubs of the Pôle Léonard de Vinci",
-        "discover": "Discover"
+        "discover": "Discover",
+        "news": "News",
+        "newsSubtitle": "Latest news from the clubs",
+        "clubsTitle": "Clubs",
+        "clubsSubtitle": "Discover clubs",
+        "clubsDescription": "Clubs are the best way to meet new people and make new friends! Currently, the Pôle has 61 clubs in various fields: sports, gaming, events, business, theater, cooking... There's a club for everyone! So don't hesitate and go have a good time with people who share the same interests as you.",
+        "clubsSearch": "Search for a club",
+        "searchPlaceholder": "Search",
+        "categories": "Categories",
+        "categoriesSubtitle": "Clubs with various themes",
+        "categoryCardsTitle": "All clubs",
+        "pulv": {
+            "title": "The Pôle Léonard de Vinci",
+            "subTitle": "A vibrant campus with a multitude of club opportunities.",
+            "step1": {
+                "title": "8 600",
+                "subTitle": "students",
+                "description": "The Pôle Léonard de Vinci is composed of 3 schools (ESILV, EMLV and IIM) and has more than 7,500 students! However, how do you meet all these people? This is where the wonderful principle of transversality comes in: transversal weeks, mandatory sports, and the best part... clubs!"
+            },
+            "step2": {
+                "title": "58 000",
+                "subTitle": "m² of premises",
+                "description": "At the Pôle, we are lucky to have an American-style campus with nearly 58,000m2 of premises! Many rooms and equipment are at your disposal if you want to have fun or create the next Go-Go Gadget... In addition, with the arrival in January 2022 of the new IIM premises and the upcoming arrival of the new ESILV and EMLV premises, the possibilities are constantly expanding!"
+            },
+            "step3": {
+                "title": "350",
+                "subTitle": "events",
+                "description": "Clubs liven up the life of the Pôle and students with their events! Whether they are directly aimed at Pôle students or open to the outside, events are moments not to be missed."
+            }
+        },
+        "footerStart": "Made by",
+        "footerEnd": "with ❤️ - Code available on"
     },
     "admin": {
         "driver": {

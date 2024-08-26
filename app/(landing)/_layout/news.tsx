@@ -5,6 +5,7 @@ import Title from "./components/title";
 import NewsCard from "@/app/(admin)/(dashboard)/webmaster/news/_components/news-card";
 import { packLangs } from "@/lib/supabase/wrappers/languages";
 import Cotd from "@/components/clubs/cotd";
+import T from "@/components/i18n/t";
 
 export default async function News() {
     const supabase = await createClient();
@@ -19,7 +20,7 @@ export default async function News() {
 
     return (
         <section className="flex flex-col gap-16 py-24 px-4 container items-center">
-            <Title title="News" subtitle="Latest news from the club" />
+            <Title title={<T>landing.news</T>} subtitle={<T>landing.newsSubtitle</T>} />
             {Object.entries(newsList).map(([id, news]) => (
                 <NewsCard key={id} newsList={news} className="max-w-3xl" />
             ))}

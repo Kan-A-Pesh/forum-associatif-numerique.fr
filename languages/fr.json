@@ -1,7 +1,38 @@
 {
     "landing": {
         "hero": "Clubs étudiants du Pôle Léonard de Vinci",
-        "discover": "Découvrir"
+        "discover": "Découvrir",
+        "news": "Quoi de neuf ?",
+        "newsSubtitle": "Dernières infos de la part des associations",
+        "clubsTitle": "Associations",
+        "clubsSubtitle": "Découvrez les associations",
+        "clubsDescription": "Les associations, c’est le meilleur moyen pour faire des rencontres et nouer de belles amitiés! Actuellement, le Pôle compte 61 associations aux domaines variés: sport, gaming, événementiel, business, théâtre, cuisine… Une association te correspond forcément! Alors n’hésite plus et va prendre du bon temps avec des gens partageant les mêmes centres d’intérêt que toi.",
+        "clubsSearch": "Rechercher une association",
+        "searchPlaceholder": "Rechercher",
+        "categories": "Catégories",
+        "categoriesSubtitle": "Des associations aux thématiques variées",
+        "categoryCardsTitle": "Toutes les assos",
+        "pulv": {
+            "title": "Le Pôle Léonard de Vinci",
+            "subTitle": "Un campus vibrant avec une multitude d'opportunités associatives.",
+            "step1": {
+                "title": "8 600",
+                "subTitle": "étudiants",
+                "description": "Le pôle Léonard de Vinci est composé de 3 écoles (ESILV, EMLV et IIM) et regroupe plus de 7 500 étudiants ! Cependant, comment rencontrer toutes ces personnes ? C’est là qu’intervient le merveilleux principe de la transversalité : semaines transverses, sport obligatoire, et on y vient, le meilleur… les associations !"
+            },
+            "step2": {
+                "title": "58 000",
+                "subTitle": "m² de locaux",
+                "description": "Au Pôle, nous avons la chance d’avoir un campus à l’américaine avec près de 58 000m2 de locaux ! De nombreuses salles et équipements sont à ta disposition si tu veux t’amuser ou créer le prochain Go-Go Gadget… De plus, avec l'arrivée en janvier 2022 des nouveaux locaux de l'IIM et l'arrivée prochaine des nouveaux locaux de l'ESILV et l'EMLV, le champ des possibles s'élargit constamment !"
+            },
+            "step3": {
+                "title": "350",
+                "subTitle": "évènements",
+                "description": "Les associations rythment la vie du pôle et des étudiants grâce à leurs évènements ! Qu’ils soient directement à destination des étudiants du pôle ou alors ouverts à l’extérieur, les évènements sont des moments à ne pas louper."
+            }
+        },
+        "footerStart": "Fait par",
+        "footerEnd": "avec ❤️ - Code disponible sur"
     },
     "admin": {
         "driver": {
