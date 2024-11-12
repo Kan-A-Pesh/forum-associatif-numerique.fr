@@ -1,0 +1,19 @@
+services:
+  main:
+    build:
+      target: runner
+    environment:
+      NEXT_PUBLIC_SUPABASE_URL: ${SUPABASE_URL:-http://localhost:54321}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-your-anon-key}
+      NEXT_PUBLIC_URL: ${NEXT_PUBLIC_URL:-http://localhost:3000}
+      NEXT_PUBLIC_SUPPORT_MAIL: ${NEXT_PUBLIC_SUPPORT_MAIL:-support@mail.com}
+      NEXT_PUBLIC_STORAGE_URL: ${NEXT_PUBLIC_STORAGE_URL:-http://localhost:54321/storage/v1/object/public}
+
+      SUPABASE_SERVICE_KEY: ${SUPABASE_SERVICE_KEY:-your-service-role-key}
+
+      SMTP_HOST: ${SMTP_HOST:-smtp.example.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-username}
+      SMTP_PASS: ${SMTP_PASS:-password}
+      SMTP_FROM: ${SMTP_FROM:-User <username@example.com>}
+      MAIL_TEMPLATE_PATH: ${MAIL_TEMPLATE_PATH:-/app/path/to/mail.html}
